@@ -155,52 +155,361 @@
         /* Stats Grid */
         .stats-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(2, 1fr);
             gap: 24px;
-            margin-bottom: 48px;
+            margin-bottom: 32px;
         }
 
         .stat-card {
-            background: #2d2d3a;
-            border: 1px solid #3a3a4a;
-            border-radius: 12px;
+            background: rgba(31, 41, 55, 0.8);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(75, 85, 99, 0.3);
+            border-radius: 16px;
             padding: 24px;
-            transition: all 0.2s ease;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
         }
 
         .stat-card:hover {
-            border-color: #4a4a5a;
+            transform: translateY(-4px);
+            border-color: #667eea;
+            box-shadow: 0 15px 35px rgba(102, 126, 234, 0.2);
         }
 
         .stat-header {
             display: flex;
             align-items: center;
-            margin-bottom: 12px;
+            margin-bottom: 16px;
         }
 
         .stat-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             margin-right: 12px;
-            font-size: 16px;
+            font-size: 18px;
+        }
+
+        .stat-icon.licenses {
+            background: rgba(139, 92, 246, 0.2);
+            color: #a78bfa;
+        }
+
+        .stat-icon.balance {
+            background: rgba(59, 130, 246, 0.2);
+            color: #60a5fa;
         }
 
         .stat-title {
-            color: #8b8b8b;
-            font-size: 13px;
-            font-weight: 400;
+            color: #9ca3af;
+            font-size: 14px;
+            font-weight: 500;
         }
 
         .stat-value {
             font-size: 32px;
-            font-weight: 600;
+            font-weight: 700;
             color: #ffffff;
+        }
+
+        /* Generate Key Section */
+        .generate-section {
+            background: rgba(31, 41, 55, 0.8);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(75, 85, 99, 0.3);
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 32px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .generate-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, #10b981, #059669);
+        }
+
+        .generate-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 16px;
+        }
+
+        .generate-title {
+            display: flex;
+            align-items: center;
+            color: #ffffff;
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .generate-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 12px;
+            font-size: 18px;
+            background: rgba(16, 185, 129, 0.2);
+            color: #34d399;
+        }
+
+        .generate-btn {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            border: none;
+            border-radius: 8px;
+            padding: 12px 24px;
+            font-size: 14px;
+            font-weight: 600;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .generate-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .generate-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(16, 185, 129, 0.3);
+        }
+
+        .generate-btn:hover::before {
+            left: 100%;
+        }
+
+        .generate-description {
+            color: #9ca3af;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(4px);
+        }
+
+        .modal-content {
+            background: #2d2d3a;
+            margin: 5% auto;
+            padding: 0;
+            border: 1px solid #3a3a4a;
+            border-radius: 16px;
+            width: 90%;
+            max-width: 500px;
+            position: relative;
+            animation: slideDown 0.3s ease-out;
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .modal-header {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            padding: 20px 24px;
+            border-radius: 16px 16px 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .close {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 24px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.2s ease;
+        }
+
+        .close:hover {
+            color: white;
+        }
+
+        .modal-body {
+            padding: 24px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            color: #ffffff;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .form-input, .form-select {
+            width: 100%;
+            padding: 12px;
+            background: #1a1a1a;
+            border: 1px solid #3a3a4a;
+            border-radius: 8px;
+            color: #ffffff;
+            font-size: 14px;
+            transition: border-color 0.2s ease;
+        }
+
+        .form-input:focus, .form-select:focus {
+            outline: none;
+            border-color: #10b981;
+        }
+
+        .form-input::placeholder {
+            color: #8b8b8b;
+        }
+
+        .modal-footer {
+            padding: 20px 24px;
+            border-top: 1px solid #3a3a4a;
+            display: flex;
+            gap: 12px;
+            justify-content: flex-end;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .btn-cancel {
+            background: #374151;
+            color: #d1d5db;
+        }
+
+        .btn-cancel:hover {
+            background: #4b5563;
+        }
+
+        .btn-generate {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+        }
+
+        .btn-generate:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+        }
+
+        /* Keys Display */
+        .generated-keys {
+            background: #1a1a1a;
+            border: 1px solid #3a3a4a;
+            border-radius: 8px;
+            padding: 16px;
+            margin-top: 16px;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+
+        .key-item {
+            background: #2d2d3a;
+            padding: 8px 12px;
+            border-radius: 6px;
+            margin-bottom: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            color: #34d399;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .key-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .copy-btn {
+            background: none;
+            border: none;
+            color: #8b8b8b;
+            cursor: pointer;
+            font-size: 12px;
+            transition: color 0.2s ease;
+        }
+
+        .copy-btn:hover {
+            color: #10b981;
         }
 
         /* Updates Section */
         .updates-section {
-            background: #2d2d3a;
-            border: 1px solid #3a3a4a;
-            border-radius: 12px;
+            background: rgba(31, 41, 55, 0.8);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(75, 85, 99, 0.3);
+            border-radius: 16px;
             padding: 24px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .updates-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, #f59e0b, #d97706);
         }
 
         .section-header {
@@ -210,8 +519,16 @@
         }
 
         .section-icon {
-            margin-right: 8px;
-            font-size: 16px;
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 12px;
+            font-size: 18px;
+            background: rgba(245, 158, 11, 0.2);
+            color: #fbbf24;
         }
 
         .section-title {
@@ -221,16 +538,16 @@
         }
 
         .no-updates {
-            text-align: left;
-            color: #8b8b8b;
+            text-align: center;
+            color: #9ca3af;
             font-size: 14px;
-            display: flex;
-            align-items: center;
+            padding: 40px 20px;
         }
 
         .no-updates-icon {
-            margin-right: 8px;
-            font-size: 16px;
+            font-size: 48px;
+            margin-bottom: 16px;
+            display: block;
         }
 
         /* Responsive */
@@ -332,7 +649,7 @@
                         <span class="nav-icon">⚙️</span>
                         Settings
                     </a>
-                    <a href="#" class="nav-item" onclick="logout()">
+                    <a href="#" class="nav-item" id="logoutBtn">
                         <span class="nav-icon">🚪</span>
                         Logout
                     </a>
@@ -342,12 +659,12 @@
 
         <!-- Main Content -->
         <main class="main-content fade-in">
-            <button class="menu-toggle" onclick="toggleSidebar()">☰</button>
+            <button class="menu-toggle" id="menuToggle">☰</button>
             
             <header class="header">
                 <div class="header-left">
                     <h1>Dashboard</h1>
-                    <p class="welcome-text">Welcome Back, Angelware124!</p>
+                    <p class="welcome-text" id="welcomeText">Welcome Back, Angel123!</p>
                 </div>
                 <div class="header-right">
                     <div class="user-dropdown">
@@ -362,7 +679,7 @@
             <div class="stats-grid">
                 <div class="stat-card">
                     <div class="stat-header">
-                        <div class="stat-icon">🔑</div>
+                        <div class="stat-icon licenses">🔑</div>
                         <div class="stat-title">Licenses Generated (Active App)</div>
                     </div>
                     <div class="stat-value" id="licensesCount">0</div>
@@ -370,18 +687,24 @@
 
                 <div class="stat-card">
                     <div class="stat-header">
-                        <div class="stat-icon">💰</div>
-                        <div class="stat-title">Total Sales (Active App)</div>
-                    </div>
-                    <div class="stat-value" id="salesAmount">$0.00</div>
-                </div>
-
-                <div class="stat-card">
-                    <div class="stat-header">
-                        <div class="stat-icon">💳</div>
+                        <div class="stat-icon balance">💳</div>
                         <div class="stat-title">Your Balance</div>
                     </div>
                     <div class="stat-value" id="balanceAmount">$0.00</div>
+                </div>
+            </div>
+
+            <!-- Generate Key Section -->
+            <div class="generate-section">
+                <div class="generate-header">
+                    <div class="generate-title">
+                        <div class="generate-icon">🗝️</div>
+                        <span>License Key Generator</span>
+                    </div>
+                    <button class="generate-btn" id="generateKeyBtn">Generate Key</button>
+                </div>
+                <div class="generate-description">
+                    Click the button above to generate new license keys with custom durations and prefixes.
                 </div>
             </div>
 
@@ -394,36 +717,107 @@
                 
                 <div class="no-updates">
                     <span class="no-updates-icon">📭</span>
-                    <span>No updates</span>
+                    <div>
+                        <div style="font-weight: 500; margin-bottom: 4px;">No updates available</div>
+                        <div style="font-size: 12px; opacity: 0.8;">Check back later for news and improvements</div>
+                    </div>
                 </div>
             </div>
         </main>
+    </div>
+
+    <!-- Generate Key Modal -->
+    <div id="generateModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-title">
+                    <span>🗝️</span>
+                    Generate License Keys
+                </div>
+                <span class="close" id="closeModal">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label class="form-label">Duration</label>
+                    <select class="form-select" id="duration">
+                        <option value="DAY">Day</option>
+                        <option value="WEEK">Week</option>
+                        <option value="MONTH">Month</option>
+                        <option value="YEAR">Year</option>
+                        <option value="LIFETIME">Lifetime</option>
+                        <option value="CUSTOM">Custom</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Prefix (Optional)</label>
+                    <input type="text" class="form-input" id="prefix" placeholder="e.g., DEV, PROD, TEST" maxlength="10">
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Amount</label>
+                    <input type="number" class="form-input" id="amount" placeholder="Number of keys to generate" min="1" max="50" value="1">
+                </div>
+
+                <div id="generatedKeys" class="generated-keys" style="display: none;">
+                    <div style="margin-bottom: 12px; font-size: 14px; font-weight: 600; color: #34d399;">Generated Keys:</div>
+                    <div id="keysList"></div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-cancel" id="cancelBtn">Cancel</button>
+                <button class="btn btn-generate" id="generateKeysBtn">Generate Keys</button>
+            </div>
+        </div>
     </div>
 
     <script>
         // Dashboard data
         const dashboardData = {
             licenses: 0,
-            sales: 0.00,
-            balance: 0.00
+            balance: 0.00,
+            username: 'Angel123'
         };
 
-        // Toggle sidebar for mobile
-        function toggleSidebar() {
-            document.getElementById('sidebar').classList.toggle('open');
+        // Generated keys storage
+        let generatedKeys = [];
+
+        // Set username from login
+        function setUsername(username) {
+            dashboardData.username = username;
+            document.getElementById('welcomeText').textContent = `Welcome Back, ${username}!`;
         }
 
-        // Logout function
-        function logout() {
-            if (confirm('Are you sure you want to logout?')) {
-                window.location.href = 'index.html';
-            }
+        // Generate unique key segment
+        function generateKeySegment() {
+            return Math.random().toString(36).substring(2, 6).toUpperCase();
+        }
+
+        // Copy key to clipboard
+        function copyKey(key) {
+            navigator.clipboard.writeText(key).then(() => {
+                // Visual feedback
+                const copyBtns = document.querySelectorAll('.copy-btn');
+                copyBtns.forEach(btn => {
+                    if (btn.getAttribute('data-key') === key) {
+                        const originalText = btn.innerHTML;
+                        btn.innerHTML = '✓ Copied';
+                        btn.style.color = '#10b981';
+                        setTimeout(() => {
+                            btn.innerHTML = originalText;
+                            btn.style.color = '#8b8b8b';
+                        }, 2000);
+                    }
+                });
+            }).catch(err => {
+                console.error('Failed to copy: ', err);
+                alert('Failed to copy key to clipboard');
+            });
         }
 
         // Animation function for counting numbers
         function animateCounter(element, start, end, duration = 1000) {
             const startTime = performance.now();
-            const isDecimal = end.toString().includes('.');
             
             function updateCounter(currentTime) {
                 const elapsed = currentTime - startTime;
@@ -451,7 +845,6 @@
         // Update dashboard data
         function updateDashboardData(newData) {
             const licensesEl = document.getElementById('licensesCount');
-            const salesEl = document.getElementById('salesAmount');
             const balanceEl = document.getElementById('balanceAmount');
             
             if (newData.licenses !== undefined && newData.licenses !== dashboardData.licenses) {
@@ -459,40 +852,170 @@
                 dashboardData.licenses = newData.licenses;
             }
             
-            if (newData.sales !== undefined && newData.sales !== dashboardData.sales) {
-                const currentSales = parseFloat(salesEl.textContent.replace('$', '').replace(/,/g, '')) || 0;
-                animateCounter(salesEl, currentSales, newData.sales);
-                dashboardData.sales = newData.sales;
-            }
-            
             if (newData.balance !== undefined && newData.balance !== dashboardData.balance) {
                 const currentBalance = parseFloat(balanceEl.textContent.replace('$', '').replace(/,/g, '')) || 0;
                 animateCounter(balanceEl, currentBalance, newData.balance);
                 dashboardData.balance = newData.balance;
             }
+            
+            if (newData.username) {
+                setUsername(newData.username);
+            }
+        }
+
+        // Display generated keys in modal
+        function displayGeneratedKeys(keys) {
+            const keysContainer = document.getElementById('generatedKeys');
+            const keysList = document.getElementById('keysList');
+            
+            keysList.innerHTML = '';
+            
+            keys.forEach(key => {
+                const keyItem = document.createElement('div');
+                keyItem.className = 'key-item';
+                keyItem.innerHTML = `
+                    <span>${key}</span>
+                    <button class="copy-btn" data-key="${key}">📋 Copy</button>
+                `;
+                keysList.appendChild(keyItem);
+            });
+            
+            // Add event listeners for copy buttons
+            keysList.querySelectorAll('.copy-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    copyKey(this.getAttribute('data-key'));
+                });
+            });
+            
+            keysContainer.style.display = 'block';
         }
 
         // Initialize dashboard
         document.addEventListener('DOMContentLoaded', function() {
-            // Dashboard starts with all zeros as requested
             console.log('Dashboard initialized with zero values');
+
+            // Menu toggle
+            document.getElementById('menuToggle').addEventListener('click', function() {
+                document.getElementById('sidebar').classList.toggle('open');
+            });
+
+            // Logout button
+            document.getElementById('logoutBtn').addEventListener('click', function() {
+                if (confirm('Are you sure you want to logout?')) {
+                    window.location.href = 'index.html';
+                }
+            });
+
+            // Generate Key button
+            document.getElementById('generateKeyBtn').addEventListener('click', function() {
+                document.getElementById('generateModal').style.display = 'block';
+                document.getElementById('generatedKeys').style.display = 'none';
+                document.getElementById('keysList').innerHTML = '';
+            });
+
+            // Close modal buttons
+            document.getElementById('closeModal').addEventListener('click', function() {
+                document.getElementById('generateModal').style.display = 'none';
+            });
+
+            document.getElementById('cancelBtn').addEventListener('click', function() {
+                document.getElementById('generateModal').style.display = 'none';
+            });
+
+            // Generate Keys button
+            document.getElementById('generateKeysBtn').addEventListener('click', function() {
+                const duration = document.getElementById('duration').value;
+                const prefix = document.getElementById('prefix').value.trim().toUpperCase();
+                const amount = parseInt(document.getElementById('amount').value) || 1;
+
+                if (amount < 1 || amount > 50) {
+                    alert('Please enter a valid amount between 1 and 50.');
+                    return;
+                }
+
+                const btn = this;
+                const originalText = btn.textContent;
+                
+                // Show loading state
+                btn.textContent = 'Generating...';
+                btn.disabled = true;
+                
+                setTimeout(() => {
+                    const newKeys = [];
+                    const usedKeys = new Set(generatedKeys);
+
+                    for (let i = 0; i < amount; i++) {
+                        let newKey;
+                        let attempts = 0;
+                        
+                        // Generate unique key
+                        do {
+                            let keyParts = [];
+                            
+                            // Add duration prefix if not custom
+                            if (duration !== 'CUSTOM') {
+                                keyParts.push(duration);
+                            }
+                            
+                            // Add custom prefix if provided
+                            if (prefix) {
+                                keyParts.push(prefix);
+                            }
+                            
+                            // Add random segments to make 4 parts total
+                            const remainingParts = 4 - keyParts.length;
+                            for (let j = 0; j < remainingParts; j++) {
+                                keyParts.push(generateKeySegment());
+                            }
+                            
+                            newKey = keyParts.join('-');
+                            attempts++;
+                        } while (usedKeys.has(newKey) && attempts < 100);
+                        
+                        if (attempts < 100) {
+                            newKeys.push(newKey);
+                            usedKeys.add(newKey);
+                            generatedKeys.push(newKey);
+                        }
+                    }
+
+                    // Display generated keys
+                    displayGeneratedKeys(newKeys);
+                    
+                    // Update license count
+                    updateDashboardData({ licenses: dashboardData.licenses + newKeys.length });
+                    
+                    // Reset button
+                    btn.textContent = originalText;
+                    btn.disabled = false;
+                    
+                }, 1500);
+            });
+
+            // Close modal when clicking outside
+            window.addEventListener('click', function(e) {
+                const modal = document.getElementById('generateModal');
+                if (e.target === modal) {
+                    modal.style.display = 'none';
+                }
+            });
+
+            // Close sidebar when clicking outside on mobile
+            document.addEventListener('click', function(e) {
+                const sidebar = document.getElementById('sidebar');
+                const menuToggle = document.getElementById('menuToggle');
+                
+                if (window.innerWidth <= 1024 && 
+                    sidebar.classList.contains('open') && 
+                    !sidebar.contains(e.target) && 
+                    !menuToggle.contains(e.target)) {
+                    sidebar.classList.remove('open');
+                }
+            });
         });
 
         // Make update function globally available
         window.updateDashboard = updateDashboardData;
-
-        // Close sidebar when clicking outside on mobile
-        document.addEventListener('click', function(e) {
-            const sidebar = document.getElementById('sidebar');
-            const menuToggle = document.querySelector('.menu-toggle');
-            
-            if (window.innerWidth <= 1024 && 
-                sidebar.classList.contains('open') && 
-                !sidebar.contains(e.target) && 
-                !menuToggle.contains(e.target)) {
-                sidebar.classList.remove('open');
-            }
-        });
     </script>
 </body>
 </html>
