@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Radiant - Dashboard</title>
+    <title>Minecraft Account Generator</title>
+    <meta name="description" content="#1 FREE Minecraft Account Generator" />
     <style>
         * {
             margin: 0;
@@ -12,285 +13,112 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: #1a1a1a;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #0a0a0a 100%);
             color: #ffffff;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
             overflow-x: hidden;
         }
 
-        .dashboard-container {
-            display: flex;
-            min-height: 100vh;
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 20%, rgba(0, 255, 136, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(0, 123, 255, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: -1;
         }
 
-        /* Sidebar */
-        .sidebar {
-            width: 250px;
-            background: #2d2d3a;
-            border-right: 1px solid #3a3a4a;
-            padding: 20px 0;
-            position: fixed;
-            height: 100vh;
-            left: 0;
-            top: 0;
+        .container {
+            max-width: 500px;
+            width: 90%;
+            background: rgba(15, 15, 15, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 
+                0 20px 60px rgba(0, 0, 0, 0.5),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            padding: 40px;
+            text-align: center;
+            position: relative;
+        }
+
+        .container::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, #00ff88, #007bff, #00ff88);
+            border-radius: 20px;
+            z-index: -1;
+            opacity: 0.3;
+            filter: blur(10px);
         }
 
         .logo {
-            padding: 0 24px 24px 24px;
-            border-bottom: 1px solid #3a3a4a;
-            margin-bottom: 24px;
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(45deg, #00ff88, #007bff);
+            border-radius: 15px;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            font-weight: bold;
+            color: white;
+            text-shadow: 0 0 20px rgba(0, 255, 136, 0.5);
+            box-shadow: 0 10px 30px rgba(0, 255, 136, 0.3);
         }
 
-        .logo h1 {
-            font-size: 20px;
-            font-weight: 600;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        h1 {
+            font-size: 28px;
+            margin-bottom: 10px;
+            background: linear-gradient(45deg, #00ff88, #ffffff, #007bff);
+            background-clip: text;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .nav-section {
-            margin-bottom: 24px;
-        }
-
-        .nav-label {
-            padding: 0 24px 8px 24px;
-            font-size: 11px;
-            font-weight: 600;
-            color: #8b8b8b;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .nav-item {
-            display: flex;
-            align-items: center;
-            padding: 10px 24px;
-            color: #b0b0b0;
-            text-decoration: none;
-            font-size: 14px;
-            font-weight: 500;
-            transition: all 0.2s ease;
-        }
-
-        .nav-item:hover {
-            background: rgba(102, 126, 234, 0.1);
-            color: #ffffff;
-        }
-
-        .nav-item.active {
-            background: rgba(102, 126, 234, 0.2);
-            color: #667eea;
-            border-right: 2px solid #667eea;
-        }
-
-        .nav-icon {
-            margin-right: 12px;
-            font-size: 16px;
-            width: 16px;
-            text-align: center;
-        }
-
-        /* Main Content */
-        .main-content {
-            margin-left: 250px;
-            padding: 32px 48px;
-            flex: 1;
-            background: #1a1a1a;
-        }
-
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 32px;
-        }
-
-        .header-left h1 {
-            font-size: 32px;
-            font-weight: 600;
-            color: #ffffff;
-            margin-bottom: 4px;
-        }
-
-        .welcome-text {
-            font-size: 16px;
-            color: #8b8b8b;
-            font-weight: 400;
-        }
-
-        .user-dropdown {
-            background: #2d2d3a;
-            border: 1px solid #3a3a4a;
-            border-radius: 6px;
-            padding: 8px 12px;
-            color: #ffffff;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 14px;
-            transition: all 0.2s ease;
-        }
-
-        .user-dropdown:hover {
-            border-color: #667eea;
-        }
-
-        .notification-badge {
-            background: #667eea;
-            color: white;
-            border-radius: 50%;
-            width: 18px;
-            height: 18px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 10px;
             font-weight: bold;
-            margin-left: 4px;
         }
 
-        /* Stats Grid */
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 24px;
-            margin-bottom: 32px;
+        .description {
+            color: #888;
+            margin-bottom: 30px;
+            font-size: 16px;
         }
 
-        .stat-card {
-            background: rgba(31, 41, 55, 0.8);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(75, 85, 99, 0.3);
-            border-radius: 16px;
-            padding: 24px;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .stat-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 2px;
-            background: linear-gradient(90deg, #667eea, #764ba2);
-        }
-
-        .stat-card:hover {
-            transform: translateY(-4px);
-            border-color: #667eea;
-            box-shadow: 0 15px 35px rgba(102, 126, 234, 0.2);
-        }
-
-        .stat-header {
+        .button-group {
             display: flex;
-            align-items: center;
-            margin-bottom: 16px;
+            gap: 15px;
+            margin-bottom: 30px;
         }
 
-        .stat-icon {
-            width: 40px;
-            height: 40px;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-right: 12px;
-            font-size: 18px;
-        }
-
-        .stat-icon.licenses {
-            background: rgba(139, 92, 246, 0.2);
-            color: #a78bfa;
-        }
-
-        .stat-icon.balance {
-            background: rgba(59, 130, 246, 0.2);
-            color: #60a5fa;
-        }
-
-        .stat-title {
-            color: #9ca3af;
-            font-size: 14px;
-            font-weight: 500;
-        }
-
-        .stat-value {
-            font-size: 32px;
-            font-weight: 700;
-            color: #ffffff;
-        }
-
-        /* Generate Key Section */
-        .generate-section {
-            background: rgba(31, 41, 55, 0.8);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(75, 85, 99, 0.3);
-            border-radius: 16px;
-            padding: 24px;
-            margin-bottom: 32px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .generate-section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 2px;
-            background: linear-gradient(90deg, #10b981, #059669);
-        }
-
-        .generate-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 16px;
-        }
-
-        .generate-title {
-            display: flex;
-            align-items: center;
-            color: #ffffff;
-            font-size: 18px;
-            font-weight: 600;
-        }
-
-        .generate-icon {
-            width: 40px;
-            height: 40px;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-right: 12px;
-            font-size: 18px;
-            background: rgba(16, 185, 129, 0.2);
-            color: #34d399;
-        }
-
-        .generate-btn {
-            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+        button {
+            flex: 1;
+            padding: 15px 20px;
             border: none;
-            border-radius: 8px;
-            padding: 12px 24px;
-            font-size: 14px;
-            font-weight: 600;
-            color: white;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: bold;
             cursor: pointer;
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
         }
 
-        .generate-btn::before {
+        button::before {
             content: '';
             position: absolute;
             top: 0;
@@ -298,303 +126,67 @@
             width: 100%;
             height: 100%;
             background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transition: left 0.5s ease;
+            transition: left 0.5s;
+        }
+
+        button:hover::before {
+            left: 100%;
+        }
+
+        .generate-btn {
+            background: linear-gradient(45deg, #00ff88, #00cc6a);
+            color: white;
+            box-shadow: 0 10px 30px rgba(0, 255, 136, 0.3);
         }
 
         .generate-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(16, 185, 129, 0.3);
+            box-shadow: 0 15px 40px rgba(0, 255, 136, 0.4);
         }
 
-        .generate-btn:hover::before {
-            left: 100%;
-        }
-
-        .generate-description {
-            color: #9ca3af;
-            font-size: 14px;
-            line-height: 1.5;
-        }
-
-        /* Modal Styles */
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            overflow: auto;
-            background: rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(4px);
-        }
-
-        .modal-content {
-            background: #2d2d3a;
-            margin: 5% auto;
-            padding: 0;
-            border: 1px solid #3a3a4a;
-            border-radius: 16px;
-            width: 90%;
-            max-width: 500px;
-            position: relative;
-            animation: slideDown 0.3s ease-out;
-        }
-
-        @keyframes slideDown {
-            from { opacity: 0; transform: translateY(-20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .modal-header {
-            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
-            padding: 20px 24px;
-            border-radius: 16px 16px 0 0;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .modal-title {
-            font-size: 18px;
-            font-weight: 600;
+        .stock-btn {
+            background: linear-gradient(45deg, #007bff, #0056b3);
             color: white;
-            display: flex;
-            align-items: center;
-            gap: 12px;
+            box-shadow: 0 10px 30px rgba(0, 123, 255, 0.3);
         }
 
-        .close {
-            color: rgba(255, 255, 255, 0.8);
-            font-size: 24px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: color 0.2s ease;
+        .stock-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 40px rgba(0, 123, 255, 0.4);
         }
 
-        .close:hover {
-            color: white;
-        }
-
-        .modal-body {
-            padding: 24px;
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        .form-label {
-            display: block;
-            margin-bottom: 8px;
-            color: #ffffff;
-            font-size: 14px;
-            font-weight: 500;
-        }
-
-        .form-input, .form-select {
-            width: 100%;
-            padding: 12px;
-            background: #1a1a1a;
-            border: 1px solid #3a3a4a;
-            border-radius: 8px;
-            color: #ffffff;
-            font-size: 14px;
-            transition: border-color 0.2s ease;
-        }
-
-        .form-input:focus, .form-select:focus {
-            outline: none;
-            border-color: #10b981;
-        }
-
-        .form-input::placeholder {
-            color: #8b8b8b;
-        }
-
-        .modal-footer {
-            padding: 20px 24px;
-            border-top: 1px solid #3a3a4a;
-            display: flex;
-            gap: 12px;
-            justify-content: flex-end;
-        }
-
-        .btn {
-            padding: 10px 20px;
-            border: none;
-            border-radius: 8px;
-            font-size: 14px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
-
-        .btn-cancel {
-            background: #374151;
-            color: #d1d5db;
-        }
-
-        .btn-cancel:hover {
-            background: #4b5563;
-        }
-
-        .btn-generate {
-            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
-            color: white;
-        }
-
-        .btn-generate:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
-        }
-
-        /* Keys Display */
-        .generated-keys {
-            background: #1a1a1a;
-            border: 1px solid #3a3a4a;
-            border-radius: 8px;
-            padding: 16px;
-            margin-top: 16px;
-            max-height: 200px;
+        .chat-box {
+            background: rgba(10, 10, 10, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            height: 200px;
             overflow-y: auto;
+            padding: 15px;
+            margin-bottom: 20px;
+            text-align: left;
         }
 
-        .key-item {
-            background: #2d2d3a;
+        .chat-box::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .chat-box::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 3px;
+        }
+
+        .chat-box::-webkit-scrollbar-thumb {
+            background: linear-gradient(45deg, #00ff88, #007bff);
+            border-radius: 3px;
+        }
+
+        .chat-message {
+            margin-bottom: 10px;
             padding: 8px 12px;
-            border-radius: 6px;
-            margin-bottom: 8px;
-            font-family: 'Courier New', monospace;
-            font-size: 12px;
-            color: #34d399;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .key-item:last-child {
-            margin-bottom: 0;
-        }
-
-        .copy-btn {
-            background: none;
-            border: none;
-            color: #8b8b8b;
-            cursor: pointer;
-            font-size: 12px;
-            transition: color 0.2s ease;
-        }
-
-        .copy-btn:hover {
-            color: #10b981;
-        }
-
-        /* Updates Section */
-        .updates-section {
-            background: rgba(31, 41, 55, 0.8);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(75, 85, 99, 0.3);
-            border-radius: 16px;
-            padding: 24px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .updates-section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 2px;
-            background: linear-gradient(90deg, #f59e0b, #d97706);
-        }
-
-        .section-header {
-            display: flex;
-            align-items: center;
-            margin-bottom: 24px;
-        }
-
-        .section-icon {
-            width: 40px;
-            height: 40px;
+            background: rgba(255, 255, 255, 0.05);
             border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-right: 12px;
-            font-size: 18px;
-            background: rgba(245, 158, 11, 0.2);
-            color: #fbbf24;
-        }
-
-        .section-title {
-            font-size: 18px;
-            font-weight: 600;
-            color: #ffffff;
-        }
-
-        .no-updates {
-            text-align: center;
-            color: #9ca3af;
-            font-size: 14px;
-            padding: 40px 20px;
-        }
-
-        .no-updates-icon {
-            font-size: 48px;
-            margin-bottom: 16px;
-            display: block;
-        }
-
-        /* Responsive */
-        @media (max-width: 1024px) {
-            .sidebar {
-                transform: translateX(-100%);
-                transition: transform 0.3s ease;
-                z-index: 1000;
-            }
-            
-            .sidebar.open {
-                transform: translateX(0);
-            }
-            
-            .main-content {
-                margin-left: 0;
-                padding: 20px;
-            }
-            
-            .stats-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .header {
-                flex-direction: column;
-                gap: 16px;
-                align-items: flex-start;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .stats-grid {
-                gap: 16px;
-            }
-            
-            .stat-card {
-                padding: 20px;
-            }
-            
-            .main-content {
-                padding: 16px;
-            }
-        }
-
-        /* Animations */
-        .fade-in {
-            animation: fadeIn 0.5s ease-out;
+            border-left: 3px solid #00ff88;
+            animation: fadeIn 0.3s ease;
         }
 
         @keyframes fadeIn {
@@ -602,420 +194,293 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        .menu-toggle {
-            display: none;
-            background: none;
-            border: none;
-            color: white;
-            font-size: 20px;
-            cursor: pointer;
-            margin-bottom: 16px;
+        .status {
+            color: #888;
+            font-style: italic;
+            text-align: center;
+            margin-bottom: 15px;
         }
 
-        @media (max-width: 1024px) {
-            .menu-toggle {
-                display: block;
-            }
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(15, 15, 15, 0.95);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            max-width: 400px;
+            width: 90%;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        }
+
+        .modal h3 {
+            margin-bottom: 20px;
+            color: #00ff88;
+        }
+
+        .account-details {
+            background: rgba(10, 10, 10, 0.8);
+            padding: 15px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .detail-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            padding: 5px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .close-btn {
+            background: linear-gradient(45deg, #ff4757, #ff3742);
+            padding: 10px 20px;
+            border-radius: 8px;
+        }
+
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-top: 2px solid #00ff88;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .error {
+            color: #ff4757;
+            background: rgba(255, 71, 87, 0.1);
+            border-left: 3px solid #ff4757;
+        }
+
+        .success {
+            color: #00ff88;
+            background: rgba(0, 255, 136, 0.1);
+            border-left: 3px solid #00ff88;
         }
     </style>
 </head>
 <body>
-    <div class="dashboard-container">
-        <!-- Sidebar -->
-        <aside class="sidebar" id="sidebar">
-            <div class="logo">
-                <h1>Radiant</h1>
+    <div class="container">
+        <div class="logo">M</div>
+        <h1>Minecraft Generator</h1>
+        <p class="description">#1 FREE Minecraft Account Generator</p>
+        
+        <div class="button-group">
+            <button class="generate-btn" onclick="generateAccount()">Generate</button>
+            <button class="stock-btn" onclick="showStock()">Stock</button>
+        </div>
+
+        <div class="status" id="status">Ready to generate accounts...</div>
+
+        <div class="chat-box" id="chatBox">
+            <div class="chat-message">
+                <strong>System:</strong> Welcome to the Minecraft Account Generator!
             </div>
-            
-            <nav>
-                <div class="nav-section">
-                    <a href="#" class="nav-item active">
-                        <span class="nav-icon">🏠</span>
-                        Dashboard
-                    </a>
-                </div>
-                
-                <div class="nav-section">
-                    <div class="nav-label">Licenses</div>
-                    <a href="#" class="nav-item">
-                        <span class="nav-icon">🔑</span>
-                        Licenses
-                    </a>
-                </div>
-                
-                <div class="nav-section">
-                    <div class="nav-label">Other</div>
-                    <a href="#" class="nav-item">
-                        <span class="nav-icon">⚙️</span>
-                        Settings
-                    </a>
-                    <a href="#" class="nav-item" id="logoutBtn">
-                        <span class="nav-icon">🚪</span>
-                        Logout
-                    </a>
-                </div>
-            </nav>
-        </aside>
-
-        <!-- Main Content -->
-        <main class="main-content fade-in">
-            <button class="menu-toggle" id="menuToggle">☰</button>
-            
-            <header class="header">
-                <div class="header-left">
-                    <h1>Dashboard</h1>
-                    <p class="welcome-text" id="welcomeText">Welcome Back, Angel123!</p>
-                </div>
-                <div class="header-right">
-                    <div class="user-dropdown">
-                        <span>Unbranded_Cheat</span>
-                        <div class="notification-badge">1</div>
-                        <span>⬇️</span>
-                    </div>
-                </div>
-            </header>
-
-            <!-- Stats Grid -->
-            <div class="stats-grid">
-                <div class="stat-card">
-                    <div class="stat-header">
-                        <div class="stat-icon licenses">🔑</div>
-                        <div class="stat-title">Licenses Generated (Active App)</div>
-                    </div>
-                    <div class="stat-value" id="licensesCount">0</div>
-                </div>
-
-                <div class="stat-card">
-                    <div class="stat-header">
-                        <div class="stat-icon balance">💳</div>
-                        <div class="stat-title">Your Balance</div>
-                    </div>
-                    <div class="stat-value" id="balanceAmount">$0.00</div>
-                </div>
-            </div>
-
-            <!-- Generate Key Section -->
-            <div class="generate-section">
-                <div class="generate-header">
-                    <div class="generate-title">
-                        <div class="generate-icon">🗝️</div>
-                        <span>License Key Generator</span>
-                    </div>
-                    <button class="generate-btn" id="generateKeyBtn">Generate Key</button>
-                </div>
-                <div class="generate-description">
-                    Click the button above to generate new license keys with custom durations and prefixes.
-                </div>
-            </div>
-
-            <!-- Latest Updates -->
-            <div class="updates-section">
-                <div class="section-header">
-                    <span class="section-icon">🔔</span>
-                    <h2 class="section-title">Latest Updates</h2>
-                </div>
-                
-                <div class="no-updates">
-                    <span class="no-updates-icon">📭</span>
-                    <div>
-                        <div style="font-weight: 500; margin-bottom: 4px;">No updates available</div>
-                        <div style="font-size: 12px; opacity: 0.8;">Check back later for news and improvements</div>
-                    </div>
-                </div>
-            </div>
-        </main>
-    </div>
-
-    <!-- Generate Key Modal -->
-    <div id="generateModal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <div class="modal-title">
-                    <span>🗝️</span>
-                    Generate License Keys
-                </div>
-                <span class="close" id="closeModal">&times;</span>
-            </div>
-            <div class="modal-body">
-                <div class="form-group">
-                    <label class="form-label">Duration</label>
-                    <select class="form-select" id="duration">
-                        <option value="DAY">Day</option>
-                        <option value="WEEK">Week</option>
-                        <option value="MONTH">Month</option>
-                        <option value="YEAR">Year</option>
-                        <option value="LIFETIME">Lifetime</option>
-                        <option value="CUSTOM">Custom</option>
-                    </select>
-                </div>
-                
-                <div class="form-group">
-                    <label class="form-label">Prefix (Optional)</label>
-                    <input type="text" class="form-input" id="prefix" placeholder="e.g., DEV, PROD, TEST" maxlength="10">
-                </div>
-                
-                <div class="form-group">
-                    <label class="form-label">Amount</label>
-                    <input type="number" class="form-input" id="amount" placeholder="Number of keys to generate" min="1" max="50" value="1">
-                </div>
-
-                <div id="generatedKeys" class="generated-keys" style="display: none;">
-                    <div style="margin-bottom: 12px; font-size: 14px; font-weight: 600; color: #34d399;">Generated Keys:</div>
-                    <div id="keysList"></div>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button class="btn btn-cancel" id="cancelBtn">Cancel</button>
-                <button class="btn btn-generate" id="generateKeysBtn">Generate Keys</button>
+            <div class="chat-message">
+                <strong>Info:</strong> Click "Generate" to create a new account or "Stock" to view available accounts.
             </div>
         </div>
     </div>
 
+    <!-- Modal for account details -->
+    <div class="modal" id="accountModal">
+        <div class="modal-content">
+            <h3>Generated Account Details</h3>
+            <div class="account-details" id="accountDetails">
+                <!-- Account details will be populated here -->
+            </div>
+            <button class="close-btn" onclick="closeModal()">Close</button>
+        </div>
+    </div>
+
     <script>
-        // Dashboard data
-        const dashboardData = {
-            licenses: 0,
-            balance: 0.00,
-            username: 'Angel123'
-        };
+        let accountCount = 0;
+        const chatBox = document.getElementById('chatBox');
+        const status = document.getElementById('status');
+        const modal = document.getElementById('accountModal');
+        const accountDetails = document.getElementById('accountDetails');
 
-        // Generated keys storage
-        let generatedKeys = [];
+        // Sample account data
+        const sampleEmails = [
+            'gamer2024@gmail.com', 'minecraft_pro@outlook.com', 'blockmaster@yahoo.com', 
+            'craftworld@hotmail.com', 'pixelgamer@gmail.com', 'enderdragon@outlook.com'
+        ];
+        const samplePasswords = [
+            'MineCraft123!', 'Gaming456#', 'Player789$', 'BlockWorld321@', 
+            'CraftMaster99!', 'EnderWorld88#'
+        ];
 
-        // Set username from login
-        function setUsername(username) {
-            dashboardData.username = username;
-            document.getElementById('welcomeText').textContent = `Welcome Back, ${username}!`;
+        function addChatMessage(message, type = 'normal') {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `chat-message ${type}`;
+            messageDiv.innerHTML = message;
+            chatBox.appendChild(messageDiv);
+            chatBox.scrollTop = chatBox.scrollHeight;
         }
 
-        // Generate unique key segment
-        function generateKeySegment() {
-            return Math.random().toString(36).substring(2, 6).toUpperCase();
-        }
-
-        // Copy key to clipboard
-        function copyKey(key) {
-            navigator.clipboard.writeText(key).then(() => {
-                // Visual feedback
-                const copyBtns = document.querySelectorAll('.copy-btn');
-                copyBtns.forEach(btn => {
-                    if (btn.getAttribute('data-key') === key) {
-                        const originalText = btn.innerHTML;
-                        btn.innerHTML = '✓ Copied';
-                        btn.style.color = '#10b981';
-                        setTimeout(() => {
-                            btn.innerHTML = originalText;
-                            btn.style.color = '#8b8b8b';
-                        }, 2000);
-                    }
-                });
-            }).catch(err => {
-                console.error('Failed to copy: ', err);
-                alert('Failed to copy key to clipboard');
-            });
-        }
-
-        // Animation function for counting numbers
-        function animateCounter(element, start, end, duration = 1000) {
-            const startTime = performance.now();
-            
-            function updateCounter(currentTime) {
-                const elapsed = currentTime - startTime;
-                const progress = Math.min(elapsed / duration, 1);
-                
-                const easedProgress = 1 - Math.pow(1 - progress, 3);
-                const current = start + (end - start) * easedProgress;
-                
-                if (element.id === 'licensesCount') {
-                    element.textContent = Math.floor(current).toLocaleString();
-                } else {
-                    element.textContent = current < 1000 
-                        ? `$${current.toFixed(2)}`
-                        : `$${current.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
-                }
-                
-                if (progress < 1) {
-                    requestAnimationFrame(updateCounter);
-                }
+        function generateRandomString(length) {
+            const chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+            let result = '';
+            for (let i = 0; i < length; i++) {
+                result += chars.charAt(Math.floor(Math.random() * chars.length));
             }
-            
-            requestAnimationFrame(updateCounter);
+            return result;
         }
 
-        // Update dashboard data
-        function updateDashboardData(newData) {
-            const licensesEl = document.getElementById('licensesCount');
-            const balanceEl = document.getElementById('balanceAmount');
-            
-            if (newData.licenses !== undefined && newData.licenses !== dashboardData.licenses) {
-                animateCounter(licensesEl, dashboardData.licenses, newData.licenses);
-                dashboardData.licenses = newData.licenses;
-            }
-            
-            if (newData.balance !== undefined && newData.balance !== dashboardData.balance) {
-                const currentBalance = parseFloat(balanceEl.textContent.replace('$', '').replace(/,/g, '')) || 0;
-                animateCounter(balanceEl, currentBalance, newData.balance);
-                dashboardData.balance = newData.balance;
-            }
-            
-            if (newData.username) {
-                setUsername(newData.username);
-            }
+        function maskString(str) {
+            if (str.length <= 3) return str;
+            return str.substring(0, 3) + '*'.repeat(str.length - 3);
         }
 
-        // Display generated keys in modal
-        function displayGeneratedKeys(keys) {
-            const keysContainer = document.getElementById('generatedKeys');
-            const keysList = document.getElementById('keysList');
+        function generateAccount() {
+            status.innerHTML = '<span class="loading"></span> Generating account...';
             
-            keysList.innerHTML = '';
-            
-            keys.forEach(key => {
-                const keyItem = document.createElement('div');
-                keyItem.className = 'key-item';
-                keyItem.innerHTML = `
-                    <span>${key}</span>
-                    <button class="copy-btn" data-key="${key}">📋 Copy</button>
-                `;
-                keysList.appendChild(keyItem);
-            });
-            
-            // Add event listeners for copy buttons
-            keysList.querySelectorAll('.copy-btn').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    copyKey(this.getAttribute('data-key'));
-                });
-            });
-            
-            keysContainer.style.display = 'block';
-        }
-
-        // Initialize dashboard
-        document.addEventListener('DOMContentLoaded', function() {
-            console.log('Dashboard initialized with zero values');
-
-            // Menu toggle
-            document.getElementById('menuToggle').addEventListener('click', function() {
-                document.getElementById('sidebar').classList.toggle('open');
-            });
-
-            // Logout button
-            document.getElementById('logoutBtn').addEventListener('click', function() {
-                if (confirm('Are you sure you want to logout?')) {
-                    window.location.href = 'index.html';
-                }
-            });
-
-            // Generate Key button
-            document.getElementById('generateKeyBtn').addEventListener('click', function() {
-                document.getElementById('generateModal').style.display = 'block';
-                document.getElementById('generatedKeys').style.display = 'none';
-                document.getElementById('keysList').innerHTML = '';
-            });
-
-            // Close modal buttons
-            document.getElementById('closeModal').addEventListener('click', function() {
-                document.getElementById('generateModal').style.display = 'none';
-            });
-
-            document.getElementById('cancelBtn').addEventListener('click', function() {
-                document.getElementById('generateModal').style.display = 'none';
-            });
-
-            // Generate Keys button
-            document.getElementById('generateKeysBtn').addEventListener('click', function() {
-                const duration = document.getElementById('duration').value;
-                const prefix = document.getElementById('prefix').value.trim().toUpperCase();
-                const amount = parseInt(document.getElementById('amount').value) || 1;
-
-                if (amount < 1 || amount > 50) {
-                    alert('Please enter a valid amount between 1 and 50.');
-                    return;
-                }
-
-                const btn = this;
-                const originalText = btn.textContent;
-                
-                // Show loading state
-                btn.textContent = 'Generating...';
-                btn.disabled = true;
-                
+            // Simulate some errors occasionally
+            if (Math.random() < 0.2) {
                 setTimeout(() => {
-                    const newKeys = [];
-                    const usedKeys = new Set(generatedKeys);
-
-                    for (let i = 0; i < amount; i++) {
-                        let newKey;
-                        let attempts = 0;
-                        
-                        // Generate unique key
-                        do {
-                            let keyParts = [];
-                            
-                            // Add duration prefix if not custom
-                            if (duration !== 'CUSTOM') {
-                                keyParts.push(duration);
-                            }
-                            
-                            // Add custom prefix if provided
-                            if (prefix) {
-                                keyParts.push(prefix);
-                            }
-                            
-                            // Add random segments to make 4 parts total
-                            const remainingParts = 4 - keyParts.length;
-                            for (let j = 0; j < remainingParts; j++) {
-                                keyParts.push(generateKeySegment());
-                            }
-                            
-                            newKey = keyParts.join('-');
-                            attempts++;
-                        } while (usedKeys.has(newKey) && attempts < 100);
-                        
-                        if (attempts < 100) {
-                            newKeys.push(newKey);
-                            usedKeys.add(newKey);
-                            generatedKeys.push(newKey);
-                        }
-                    }
-
-                    // Display generated keys
-                    displayGeneratedKeys(newKeys);
+                    addChatMessage('<strong>Error:</strong> Failed to connect to server. Retrying...', 'error');
+                    status.textContent = 'Connection error - retrying...';
                     
-                    // Update license count
-                    updateDashboardData({ licenses: dashboardData.licenses + newKeys.length });
-                    
-                    // Reset button
-                    btn.textContent = originalText;
-                    btn.disabled = false;
-                    
+                    setTimeout(() => {
+                        proceedWithGeneration();
+                    }, 1000);
                 }, 1500);
-            });
+            } else {
+                setTimeout(() => {
+                    proceedWithGeneration();
+                }, 2000);
+            }
+        }
 
-            // Close modal when clicking outside
-            window.addEventListener('click', function(e) {
-                const modal = document.getElementById('generateModal');
-                if (e.target === modal) {
-                    modal.style.display = 'none';
-                }
-            });
+        function proceedWithGeneration() {
+            accountCount++;
+            const email = sampleEmails[Math.floor(Math.random() * sampleEmails.length)];
+            const password = samplePasswords[Math.floor(Math.random() * samplePasswords.length)];
+            const username = 'Player' + generateRandomString(6);
+            
+            const maskedEmail = maskString(email);
+            const maskedPassword = maskString(password);
+            
+            // Add to chat with success styling
+            addChatMessage(`<strong>Claimed:</strong> ${maskedEmail} : ${maskedPassword}`, 'success');
+            
+            // Show detailed modal
+            showAccountDetails(email, password, username);
+            
+            status.innerHTML = `<span style="color: #00ff88;">✓</span> Successfully generated ${accountCount} accounts`;
+        }
 
-            // Close sidebar when clicking outside on mobile
-            document.addEventListener('click', function(e) {
-                const sidebar = document.getElementById('sidebar');
-                const menuToggle = document.getElementById('menuToggle');
+        function showAccountDetails(email, password, username) {
+            const details = `
+                <div class="detail-row">
+                    <span><strong>Email:</strong></span>
+                    <span>${email}</span>
+                </div>
+                <div class="detail-row">
+                    <span><strong>Password:</strong></span>
+                    <span>${password}</span>
+                </div>
+                <div class="detail-row">
+                    <span><strong>Username:</strong></span>
+                    <span>${username}</span>
+                </div>
+                <div class="detail-row">
+                    <span><strong>Type:</strong></span>
+                    <span>Premium Account</span>
+                </div>
+                <div class="detail-row">
+                    <span><strong>Status:</strong></span>
+                    <span style="color: #00ff88;">✓ Active</span>
+                </div>
+                <div class="detail-row">
+                    <span><strong>Security:</strong></span>
+                    <span style="color: #007bff;">2FA Enabled</span>
+                </div>
+            `;
+            
+            accountDetails.innerHTML = details;
+            modal.style.display = 'block';
+        }
+
+        function showStock() {
+            status.innerHTML = '<span class="loading"></span> Checking stock...';
+            
+            // Simulate occasional stock errors
+            if (Math.random() < 0.15) {
+                setTimeout(() => {
+                    addChatMessage('<strong>Warning:</strong> Stock server temporarily unavailable', 'error');
+                    status.textContent = 'Stock check failed - please try again';
+                }, 1500);
+                return;
+            }
+            
+            setTimeout(() => {
+                const stockCount = Math.floor(Math.random() * 500) + 100;
+                const premiumStock = Math.floor(Math.random() * 50) + 25;
                 
-                if (window.innerWidth <= 1024 && 
-                    sidebar.classList.contains('open') && 
-                    !sidebar.contains(e.target) && 
-                    !menuToggle.contains(e.target)) {
-                    sidebar.classList.remove('open');
-                }
-            });
-        });
+                addChatMessage(`<strong>Stock Update:</strong> ${stockCount} total accounts available`, 'success');
+                addChatMessage(`<strong>Premium:</strong> ${premiumStock} premium accounts in stock`);
+                addChatMessage(`<strong>Info:</strong> Accounts are restocked every 24 hours`);
+                
+                status.innerHTML = `<span style="color: #00ff88;">✓</span> ${stockCount} accounts in stock`;
+            }, 1500);
+        }
 
-        // Make update function globally available
-        window.updateDashboard = updateDashboardData;
+        function closeModal() {
+            modal.style.display = 'none';
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = 'none';
+            }
+        }
+
+        // Add some initial system messages
+        setTimeout(() => {
+            addChatMessage('<strong>System:</strong> Stock updated - 347 premium accounts available', 'success');
+        }, 1000);
+
+        setTimeout(() => {
+            addChatMessage('<strong>Security:</strong> All accounts are verified and secure');
+        }, 2500);
+
+        // Simulate occasional system messages
+        setInterval(() => {
+            if (Math.random() < 0.3) {
+                const messages = [
+                    '<strong>System:</strong> New accounts added to stock',
+                    '<strong>Info:</strong> Server maintenance completed',
+                    '<strong>Update:</strong> Premium accounts restocked'
+                ];
+                const randomMessage = messages[Math.floor(Math.random() * messages.length)];
+                addChatMessage(randomMessage);
+            }
+        }, 30000);
     </script>
 </body>
 </html>
