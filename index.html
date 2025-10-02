@@ -1,610 +1,365 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Radiant - Professional License Management</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Angelic - Developer Portfolio</title>
+  <meta name="description" content="Developer portfolio showcasing projects and skills" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: #0a0b14;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-            position: relative;
-        }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      background: linear-gradient(135deg, #000000 0%, #1a1a1a 50%, #000000 100%);
+      color: #ffffff;
+      min-height: 100vh;
+      overflow-x: hidden;
+      position: relative;
+    }
 
-        /* Animated background */
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: 
-                radial-gradient(circle at 20% 50%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.2) 0%, transparent 50%),
-                radial-gradient(circle at 40% 80%, rgba(119, 198, 255, 0.2) 0%, transparent 50%);
-            animation: backgroundShift 20s ease-in-out infinite alternate;
-            z-index: -1;
-        }
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at 20% 50%, rgba(255, 255, 255, 0.05) 0%, transparent 50%),
+                  radial-gradient(circle at 80% 80%, rgba(255, 255, 255, 0.05) 0%, transparent 50%);
+      pointer-events: none;
+      z-index: 0;
+    }
 
-        @keyframes backgroundShift {
-            0% { transform: translate(0px, 0px) scale(1); }
-            100% { transform: translate(-50px, -30px) scale(1.1); }
-        }
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 60px 20px;
+      position: relative;
+      z-index: 1;
+    }
 
-        .login-container {
-            background: rgba(20, 24, 37, 0.85);
-            backdrop-filter: blur(20px);
-            border-radius: 24px;
-            width: 1000px;
-            height: 600px;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            overflow: hidden;
-            box-shadow: 
-                0 25px 50px -12px rgba(0, 0, 0, 0.5),
-                0 0 0 1px rgba(255, 255, 255, 0.05);
-            animation: containerAppear 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-        }
+    .profile-section {
+      text-align: center;
+      margin-bottom: 60px;
+      animation: fadeIn 1s ease-out;
+    }
 
-        @keyframes containerAppear {
-            from {
-                opacity: 0;
-                transform: scale(0.9) translateY(40px);
-            }
-            to {
-                opacity: 1;
-                transform: scale(1) translateY(0);
-            }
-        }
+    .profile-image {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      margin: 0 auto 30px;
+      background: linear-gradient(135deg, #ffffff 0%, #666666 100%);
+      box-shadow: 0 0 60px rgba(255, 255, 255, 0.3),
+                  0 0 100px rgba(255, 255, 255, 0.2),
+                  inset 0 0 30px rgba(255, 255, 255, 0.1);
+      animation: glow 3s ease-in-out infinite;
+      background-image: url('/profile.png');
+      background-size: cover;
+      background-position: center;
+    }
 
-        /* Left Panel */
-        .brand-panel {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
-            padding: 60px 50px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            position: relative;
-            overflow: hidden;
-        }
+    h1 {
+      font-size: 3rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+      background: linear-gradient(135deg, #ffffff 0%, #888888 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-shadow: 0 0 30px rgba(255, 255, 255, 0.3);
+    }
 
-        .brand-panel::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
-            opacity: 0.3;
-        }
+    .subtitle {
+      font-size: 1.25rem;
+      color: #999999;
+      letter-spacing: 2px;
+    }
 
-        .brand-logo {
-            font-size: 3.5rem;
-            font-weight: 800;
-            background: linear-gradient(45deg, #ffffff 0%, #e0e7ff 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 20px;
-            letter-spacing: -2px;
-            position: relative;
-            z-index: 1;
-        }
+    .divider {
+      height: 2px;
+      background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.5) 50%, transparent 100%);
+      margin: 50px 0;
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+    }
 
-        .brand-subtitle {
-            font-size: 1.3rem;
-            font-weight: 600;
-            color: rgba(255, 255, 255, 0.95);
-            margin-bottom: 16px;
-            position: relative;
-            z-index: 1;
-        }
+    .section {
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0.01) 100%);
+      border-radius: 20px;
+      padding: 40px;
+      margin-bottom: 40px;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3),
+                  0 0 40px rgba(255, 255, 255, 0.05),
+                  inset 0 0 20px rgba(255, 255, 255, 0.02);
+      animation: fadeInUp 0.8s ease-out;
+      transition: all 0.3s ease;
+    }
 
-        .brand-description {
-            font-size: 1rem;
-            color: rgba(255, 255, 255, 0.8);
-            line-height: 1.6;
-            margin-bottom: 40px;
-            position: relative;
-            z-index: 1;
-        }
+    .section:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 48px rgba(0, 0, 0, 0.4),
+                  0 0 60px rgba(255, 255, 255, 0.1),
+                  inset 0 0 30px rgba(255, 255, 255, 0.03);
+    }
 
-        .features-list {
-            list-style: none;
-            position: relative;
-            z-index: 1;
-        }
+    h2 {
+      font-size: 2rem;
+      margin-bottom: 20px;
+      background: linear-gradient(135deg, #ffffff 0%, #aaaaaa 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
 
-        .feature-item {
-            display: flex;
-            align-items: center;
-            margin-bottom: 20px;
-            padding: 12px 0;
-            transition: transform 0.3s ease;
-        }
+    p, li {
+      line-height: 1.8;
+      color: #cccccc;
+      margin-bottom: 15px;
+    }
 
-        .feature-item:hover {
-            transform: translateX(8px);
-        }
+    .project-list {
+      list-style: none;
+      padding-left: 0;
+    }
 
-        .feature-icon {
-            width: 40px;
-            height: 40px;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-right: 16px;
-            font-size: 1.2rem;
-            background: rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(10px);
-        }
+    .project-list li {
+      padding: 15px 20px;
+      margin-bottom: 15px;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.02) 100%);
+      border-radius: 10px;
+      border-left: 3px solid rgba(255, 255, 255, 0.3);
+      transition: all 0.3s ease;
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.05);
+    }
 
-        .feature-text {
-            color: rgba(255, 255, 255, 0.9);
-            font-weight: 500;
-            font-size: 1rem;
-        }
+    .project-list li:hover {
+      transform: translateX(10px);
+      border-left-color: #ffffff;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+      box-shadow: 0 0 40px rgba(255, 255, 255, 0.15);
+    }
 
-        /* Right Panel */
-        .login-panel {
-            background: rgba(30, 35, 52, 0.8);
-            padding: 60px 50px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
+    .project-list a {
+      color: #ffffff;
+      text-decoration: none;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+      transition: all 0.3s ease;
+    }
 
-        .welcome-header {
-            margin-bottom: 40px;
-        }
+    .project-list a:hover {
+      border-bottom-color: #ffffff;
+      text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    }
 
-        .welcome-title {
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: #ffffff;
-            margin-bottom: 8px;
-            letter-spacing: -1px;
-        }
+    .skill-bar {
+      margin-bottom: 25px;
+    }
 
-        .welcome-subtitle {
-            font-size: 1.1rem;
-            color: #9ca3af;
-            font-weight: 400;
-        }
+    .skill-name {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 8px;
+      color: #ffffff;
+      font-weight: 500;
+    }
 
-        .form-group {
-            margin-bottom: 24px;
-        }
+    .skill-progress {
+      width: 100%;
+      height: 10px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.3);
+    }
 
-        .form-label {
-            display: block;
-            margin-bottom: 8px;
-            font-size: 0.95rem;
-            font-weight: 600;
-            color: #d1d5db;
-        }
+    .skill-progress-bar {
+      height: 100%;
+      background: linear-gradient(90deg, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0.4) 100%);
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+      transition: width 1.5s ease-out;
+      animation: shimmer 2s infinite;
+    }
 
-        .input-container {
-            position: relative;
-        }
+    @keyframes shimmer {
+      0%, 100% {
+        box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+      }
+      50% {
+        box-shadow: 0 0 30px rgba(255, 255, 255, 0.7);
+      }
+    }
 
-        .form-input {
-            width: 100%;
-            background: rgba(55, 65, 81, 0.6);
-            border: 2px solid rgba(75, 85, 99, 0.3);
-            border-radius: 12px;
-            padding: 16px 20px;
-            font-size: 1rem;
-            color: #ffffff;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            backdrop-filter: blur(10px);
-        }
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
 
-        .form-input::placeholder {
-            color: #9ca3af;
-        }
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
 
-        .form-input:focus {
-            outline: none;
-            border-color: #667eea;
-            box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
-            background: rgba(55, 65, 81, 0.8);
-        }
+    @keyframes glow {
+      0%, 100% {
+        box-shadow: 0 0 60px rgba(255, 255, 255, 0.3),
+                    0 0 100px rgba(255, 255, 255, 0.2),
+                    inset 0 0 30px rgba(255, 255, 255, 0.1);
+      }
+      50% {
+        box-shadow: 0 0 80px rgba(255, 255, 255, 0.4),
+                    0 0 120px rgba(255, 255, 255, 0.3),
+                    inset 0 0 40px rgba(255, 255, 255, 0.15);
+      }
+    }
 
-        .password-toggle {
-            position: absolute;
-            right: 16px;
-            top: 50%;
-            transform: translateY(-50%);
-            background: none;
-            border: none;
-            color: #9ca3af;
-            cursor: pointer;
-            transition: color 0.3s ease;
-        }
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 2rem;
+      }
 
-        .password-toggle:hover {
-            color: #d1d5db;
-        }
+      h2 {
+        font-size: 1.5rem;
+      }
 
-        .remember-container {
-            display: flex;
-            align-items: center;
-            margin-bottom: 32px;
-        }
+      .section {
+        padding: 30px 20px;
+      }
 
-        .checkbox {
-            width: 18px;
-            height: 18px;
-            margin-right: 12px;
-            accent-color: #667eea;
-        }
-
-        .checkbox-label {
-            color: #d1d5db;
-            font-size: 0.95rem;
-            cursor: pointer;
-        }
-
-        .login-btn {
-            width: 100%;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            border: none;
-            border-radius: 12px;
-            padding: 18px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            color: white;
-            cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-            overflow: hidden;
-            margin-bottom: 24px;
-        }
-
-        .login-btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transition: left 0.5s ease;
-        }
-
-        .login-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 15px 35px rgba(102, 126, 234, 0.3);
-        }
-
-        .login-btn:hover::before {
-            left: 100%;
-        }
-
-        .login-btn:active {
-            transform: translateY(0);
-        }
-
-        .divider {
-            display: flex;
-            align-items: center;
-            margin: 24px 0;
-        }
-
-        .divider::before,
-        .divider::after {
-            content: '';
-            flex: 1;
-            height: 1px;
-            background: rgba(75, 85, 99, 0.3);
-        }
-
-        .divider-text {
-            padding: 0 16px;
-            color: #9ca3af;
-            font-size: 0.9rem;
-        }
-
-        .footer-links {
-            text-align: center;
-        }
-
-        .footer-text {
-            color: #9ca3af;
-            font-size: 0.95rem;
-            margin-bottom: 8px;
-        }
-
-        .contact-link {
-            color: #667eea;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s ease;
-        }
-
-        .contact-link:hover {
-            color: #764ba2;
-            text-shadow: 0 0 8px rgba(102, 126, 234, 0.3);
-        }
-
-        /* Loading state */
-        .login-btn.loading {
-            pointer-events: none;
-        }
-
-        .login-btn.loading::after {
-            content: '';
-            position: absolute;
-            width: 20px;
-            height: 20px;
-            top: 50%;
-            left: 50%;
-            margin-left: -10px;
-            margin-top: -10px;
-            border: 2px solid transparent;
-            border-top: 2px solid rgba(255, 255, 255, 0.8);
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        /* Responsive */
-        @media (max-width: 1024px) {
-            .login-container {
-                width: 95%;
-                height: auto;
-                grid-template-columns: 1fr;
-                max-width: 500px;
-            }
-            
-            .brand-panel {
-                display: none;
-            }
-            
-            .login-panel {
-                padding: 40px 30px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .login-panel {
-                padding: 30px 20px;
-            }
-            
-            .welcome-title {
-                font-size: 2rem;
-            }
-        }
-
-        /* Floating particles animation */
-        .particles {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            top: 0;
-            left: 0;
-            z-index: -1;
-        }
-
-        .particle {
-            position: absolute;
-            width: 4px;
-            height: 4px;
-            background: rgba(102, 126, 234, 0.6);
-            border-radius: 50%;
-            animation: float 15s infinite linear;
-        }
-
-        .particle:nth-child(2) { left: 20%; animation-delay: 2s; background: rgba(118, 75, 162, 0.6); }
-        .particle:nth-child(3) { left: 40%; animation-delay: 4s; background: rgba(240, 147, 251, 0.6); }
-        .particle:nth-child(4) { left: 60%; animation-delay: 6s; }
-        .particle:nth-child(5) { left: 80%; animation-delay: 8s; background: rgba(118, 75, 162, 0.6); }
-
-        @keyframes float {
-            0% {
-                transform: translateY(100vh) scale(0);
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(-100vh) scale(1);
-                opacity: 0;
-            }
-        }
-
-        @keyframes shake {
-            0%, 100% { transform: translateX(0); }
-            10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
-            20%, 40%, 60%, 80% { transform: translateX(5px); }
-        }
-    </style>
+      .container {
+        padding: 40px 15px;
+      }
+    }
+  </style>
 </head>
+
 <body>
-    <div class="particles">
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
+  <div class="container">
+    <div class="profile-section">
+      <div class="profile-image"></div>
+      <h1>Angelic</h1>
+      <p class="subtitle">All-Around Developer</p>
     </div>
 
-    <div class="login-container">
-        <div class="brand-panel">
-            <div class="brand-logo">Radiant</div>
-            <div class="brand-subtitle">Professional License Management</div>
-            <div class="brand-description">
-                Secure, scalable, and efficient licensing solutions for software resellers worldwide.
-            </div>
-            
-            <ul class="features-list">
-                <li class="feature-item">
-                    <div class="feature-icon">🔒</div>
-                    <div class="feature-text">Advanced Security Protocols</div>
-                </li>
-                <li class="feature-item">
-                    <div class="feature-icon">⚡</div>
-                    <div class="feature-text">Real-time License Generation</div>
-                </li>
-                <li class="feature-item">
-                    <div class="feature-icon">📊</div>
-                    <div class="feature-text">Comprehensive Analytics</div>
-                </li>
-                <li class="feature-item">
-                    <div class="feature-icon">🌐</div>
-                    <div class="feature-text">Global Reseller Network</div>
-                </li>
-            </ul>
+    <div class="divider"></div>
+
+    <section class="section">
+      <h2>About</h2>
+      <p>Hi! I'm a 16-year-old developer with 2+ years of coding experience. I enjoy making fun and useful projects, and I'm always ready for a challenge. I usually work on paid projects, but depending on the size, I'm open to talking about the price—and if a project really interests me, I might even do it for free.</p>
+      <p>If you need someone who's reliable, motivated, and easy to work with, reach out! I'm always happy to hear new ideas and help bring them to life.</p>
+    </section>
+
+    <div class="divider"></div>
+
+    <section class="section">
+      <h2>Coding Experience</h2>
+      <p>I have experience working with a wide variety of programming languages, including:</p>
+      
+      <div class="skill-bar">
+        <div class="skill-name">
+          <span>HTML</span>
+          <span>90%</span>
         </div>
-
-        <div class="login-panel">
-            <div class="welcome-header">
-                <h1 class="welcome-title">Welcome Back</h1>
-                <p class="welcome-subtitle">Sign in to your reseller account</p>
-            </div>
-
-            <form id="loginForm">
-                <div class="form-group">
-                    <label class="form-label" for="username">Username</label>
-                    <div class="input-container">
-                        <input type="text" id="username" class="form-input" placeholder="Enter your username" required>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label class="form-label" for="password">Password</label>
-                    <div class="input-container">
-                        <input type="password" id="password" class="form-input" placeholder="Enter your password" required>
-                        <button type="button" class="password-toggle" onclick="togglePassword()">👁</button>
-                    </div>
-                </div>
-
-                <div class="remember-container">
-                    <input type="checkbox" id="remember" class="checkbox">
-                    <label for="remember" class="checkbox-label">Remember me</label>
-                </div>
-
-                <button type="submit" class="login-btn">Sign In</button>
-            </form>
-
-            <div class="divider">
-                <div class="divider-text">New to Radiant?</div>
-            </div>
-
-            <div class="footer-links">
-                <p class="footer-text">Don't have an account?</p>
-                <a href="#" class="contact-link">Contact us for reseller access</a>
-            </div>
+        <div class="skill-progress">
+          <div class="skill-progress-bar" style="width: 90%"></div>
         </div>
-    </div>
+      </div>
 
-    <script>
-        function togglePassword() {
-            const passwordInput = document.getElementById('password');
-            const toggleBtn = document.querySelector('.password-toggle');
-            
-            if (passwordInput.type === 'password') {
-                passwordInput.type = 'text';
-                toggleBtn.textContent = '🙈';
-            } else {
-                passwordInput.type = 'password';
-                toggleBtn.textContent = '👁';
-            }
-        }
+      <div class="skill-bar">
+        <div class="skill-name">
+          <span>Java</span>
+          <span>80%</span>
+        </div>
+        <div class="skill-progress">
+          <div class="skill-progress-bar" style="width: 80%"></div>
+        </div>
+      </div>
 
-        document.getElementById('loginForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const username = document.getElementById('username').value;
-            const password = document.getElementById('password').value;
-            
-            if (username && password) {
-                const btn = document.querySelector('.login-btn');
-                btn.classList.add('loading');
-                btn.textContent = '';
-                
-                setTimeout(() => {
-                    // Check for valid credentials
-                    if (username === 'angel123' && password === 'angel123') {
-                        // Success - show success message and redirect
-                        btn.classList.remove('loading');
-                        btn.textContent = '✓ Login Successful!';
-                        btn.style.background = 'linear-gradient(135deg, #10b981 0%, #059669 100%)';
-                        
-                        setTimeout(() => {
-                            alert('Welcome to Radiant Dashboard!\n\nLogin successful. Redirecting to your reseller panel...');
-                            // Redirect to dashboard.html
-                            window.location.href = 'dashboard.html';
-                        }, 1000);
-                    } else {
-                        // Invalid credentials
-                        btn.classList.remove('loading');
-                        btn.textContent = '✗ Invalid Credentials';
-                        btn.style.background = 'linear-gradient(135deg, #ef4444 0%, #dc2626 100%)';
-                        
-                        // Shake animation for error
-                        btn.style.animation = 'shake 0.5s ease-in-out';
-                        
-                        setTimeout(() => {
-                            btn.textContent = 'Sign In';
-                            btn.style.background = 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)';
-                            btn.style.animation = '';
-                        }, 2000);
-                    }
-                }, 1500);
-            }
-        });
+      <div class="skill-bar">
+        <div class="skill-name">
+          <span>C++, C, C#</span>
+          <span>50%</span>
+        </div>
+        <div class="skill-progress">
+          <div class="skill-progress-bar" style="width: 50%"></div>
+        </div>
+      </div>
 
-        // Enhanced input animations
-        document.querySelectorAll('.form-input').forEach(input => {
-            input.addEventListener('focus', function() {
-                this.parentElement.style.transform = 'translateY(-2px)';
-            });
-            
-            input.addEventListener('blur', function() {
-                this.parentElement.style.transform = 'translateY(0)';
-            });
-            
-            input.addEventListener('input', function() {
-                if (this.value) {
-                    this.style.borderColor = '#10b981';
-                } else {
-                    this.style.borderColor = 'rgba(75, 85, 99, 0.3)';
-                }
-            });
-        });
+      <div class="skill-bar">
+        <div class="skill-name">
+          <span>JavaScript</span>
+          <span>85%</span>
+        </div>
+        <div class="skill-progress">
+          <div class="skill-progress-bar" style="width: 85%"></div>
+        </div>
+      </div>
 
-        // Add subtle parallax effect
-        document.addEventListener('mousemove', function(e) {
-            const container = document.querySelector('.login-container');
-            const x = (e.clientX / window.innerWidth) * 10;
-            const y = (e.clientY / window.innerHeight) * 10;
-            
-            container.style.transform = `perspective(1000px) rotateY(${x - 5}deg) rotateX(${-(y - 5)}deg)`;
-        });
+      <div class="skill-bar">
+        <div class="skill-name">
+          <span>Python</span>
+          <span>100%</span>
+        </div>
+        <div class="skill-progress">
+          <div class="skill-progress-bar" style="width: 100%"></div>
+        </div>
+      </div>
 
-        document.addEventListener('mouseleave', function() {
-            const container = document.querySelector('.login-container');
-            container.style.transform = 'perspective(1000px) rotateY(0deg) rotateX(0deg)';
-        });
-    </script>
+      <div class="skill-bar">
+        <div class="skill-name">
+          <span>Minecraft Development</span>
+          <span>95%</span>
+        </div>
+        <div class="skill-progress">
+          <div class="skill-progress-bar" style="width: 95%"></div>
+        </div>
+      </div>
+
+      <p>Whether it's web development, desktop applications, or Discord bots, I'm always excited to take on new challenges and expand my skillset.</p>
+    </section>
+
+    <div class="divider"></div>
+
+    <section class="section">
+      <h2>Projects</h2>
+      <p>Projects I've built:</p>
+      <ul class="project-list">
+        <li>Fatal Studios Website – Responsive HTML site</li>
+        <li>Boostify Bot – Custom server boosting bot</li>
+        <li>All-Purpose Bot – Moderation, utility & fun features</li>
+        <li>License System Bot – Authentication & licensing</li>
+        <li>EonAuth - License Management - <a href="https://eonauth.vercel.app/" target="_blank" rel="noopener">https://eonauth.vercel.app/</a></li>
+        <li>SIMULATED Nitro Generator - ALL FAKE - <a href="https://dcnitrogenerator.vercel.app/" target="_blank" rel="noopener">https://dcnitrogenerator.vercel.app/</a></li>
+        <li>SIMULATED Minecraft Account Generator - ALL FAKE - <a href="https://mcaccountgenerator.vercel.app/" target="_blank" rel="noopener">https://mcaccountgenerator.vercel.app/</a></li>
+      </ul>
+      <p>Each project is built clean, optimized, and scalable.</p>
+    </section>
+
+    <div class="divider"></div>
+
+    <section class="section">
+      <h2>Timezone & Availability</h2>
+      <p><strong>Timezone:</strong> MST/MDT</p>
+      <p><strong>Weekdays:</strong> 9 AM – 8 PM</p>
+      <p><strong>Weekends:</strong> 10 AM – 10 PM</p>
+      <p>I'm usually quick to respond and flexible with scheduling for project discussions or live fixes.</p>
+    </section>
+  </div>
 </body>
 </html>
