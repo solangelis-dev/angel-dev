@@ -1,486 +1,365 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Minecraft Account Generator</title>
-    <meta name="description" content="#1 FREE Minecraft Account Generator" />
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Angelic - Developer Portfolio</title>
+  <meta name="description" content="Developer portfolio showcasing projects and skills" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #0a0a0a 100%);
-            color: #ffffff;
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            position: relative;
-            overflow-x: hidden;
-        }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      background: linear-gradient(135deg, #000000 0%, #1a1a1a 50%, #000000 100%);
+      color: #ffffff;
+      min-height: 100vh;
+      overflow-x: hidden;
+      position: relative;
+    }
 
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: 
-                radial-gradient(circle at 20% 20%, rgba(0, 255, 136, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 80% 80%, rgba(0, 123, 255, 0.1) 0%, transparent 50%);
-            pointer-events: none;
-            z-index: -1;
-        }
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at 20% 50%, rgba(255, 255, 255, 0.05) 0%, transparent 50%),
+                  radial-gradient(circle at 80% 80%, rgba(255, 255, 255, 0.05) 0%, transparent 50%);
+      pointer-events: none;
+      z-index: 0;
+    }
 
-        .container {
-            max-width: 500px;
-            width: 90%;
-            background: rgba(15, 15, 15, 0.95);
-            backdrop-filter: blur(20px);
-            border-radius: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 
-                0 20px 60px rgba(0, 0, 0, 0.5),
-                inset 0 1px 0 rgba(255, 255, 255, 0.1);
-            padding: 40px;
-            text-align: center;
-            position: relative;
-        }
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 60px 20px;
+      position: relative;
+      z-index: 1;
+    }
 
-        .container::before {
-            content: '';
-            position: absolute;
-            top: -2px;
-            left: -2px;
-            right: -2px;
-            bottom: -2px;
-            background: linear-gradient(45deg, #00ff88, #007bff, #00ff88);
-            border-radius: 20px;
-            z-index: -1;
-            opacity: 0.3;
-            filter: blur(10px);
-        }
+    .profile-section {
+      text-align: center;
+      margin-bottom: 60px;
+      animation: fadeIn 1s ease-out;
+    }
 
-        .logo {
-            width: 80px;
-            height: 80px;
-            background: linear-gradient(45deg, #00ff88, #007bff);
-            border-radius: 15px;
-            margin: 0 auto 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 40px;
-            font-weight: bold;
-            color: white;
-            text-shadow: 0 0 20px rgba(0, 255, 136, 0.5);
-            box-shadow: 0 10px 30px rgba(0, 255, 136, 0.3);
-        }
+    .profile-image {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      margin: 0 auto 30px;
+      background: linear-gradient(135deg, #ffffff 0%, #666666 100%);
+      box-shadow: 0 0 60px rgba(255, 255, 255, 0.3),
+                  0 0 100px rgba(255, 255, 255, 0.2),
+                  inset 0 0 30px rgba(255, 255, 255, 0.1);
+      animation: glow 3s ease-in-out infinite;
+      background-image: url('/profile.png');
+      background-size: cover;
+      background-position: center;
+    }
 
-        h1 {
-            font-size: 28px;
-            margin-bottom: 10px;
-            background: linear-gradient(45deg, #00ff88, #ffffff, #007bff);
-            background-clip: text;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            font-weight: bold;
-        }
+    h1 {
+      font-size: 3rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+      background: linear-gradient(135deg, #ffffff 0%, #888888 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-shadow: 0 0 30px rgba(255, 255, 255, 0.3);
+    }
 
-        .description {
-            color: #888;
-            margin-bottom: 30px;
-            font-size: 16px;
-        }
+    .subtitle {
+      font-size: 1.25rem;
+      color: #999999;
+      letter-spacing: 2px;
+    }
 
-        .button-group {
-            display: flex;
-            gap: 15px;
-            margin-bottom: 30px;
-        }
+    .divider {
+      height: 2px;
+      background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.5) 50%, transparent 100%);
+      margin: 50px 0;
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+    }
 
-        button {
-            flex: 1;
-            padding: 15px 20px;
-            border: none;
-            border-radius: 12px;
-            font-size: 16px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
+    .section {
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0.01) 100%);
+      border-radius: 20px;
+      padding: 40px;
+      margin-bottom: 40px;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3),
+                  0 0 40px rgba(255, 255, 255, 0.05),
+                  inset 0 0 20px rgba(255, 255, 255, 0.02);
+      animation: fadeInUp 0.8s ease-out;
+      transition: all 0.3s ease;
+    }
 
-        button::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transition: left 0.5s;
-        }
+    .section:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 48px rgba(0, 0, 0, 0.4),
+                  0 0 60px rgba(255, 255, 255, 0.1),
+                  inset 0 0 30px rgba(255, 255, 255, 0.03);
+    }
 
-        button:hover::before {
-            left: 100%;
-        }
+    h2 {
+      font-size: 2rem;
+      margin-bottom: 20px;
+      background: linear-gradient(135deg, #ffffff 0%, #aaaaaa 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
 
-        .generate-btn {
-            background: linear-gradient(45deg, #00ff88, #00cc6a);
-            color: white;
-            box-shadow: 0 10px 30px rgba(0, 255, 136, 0.3);
-        }
+    p, li {
+      line-height: 1.8;
+      color: #cccccc;
+      margin-bottom: 15px;
+    }
 
-        .generate-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 15px 40px rgba(0, 255, 136, 0.4);
-        }
+    .project-list {
+      list-style: none;
+      padding-left: 0;
+    }
 
-        .stock-btn {
-            background: linear-gradient(45deg, #007bff, #0056b3);
-            color: white;
-            box-shadow: 0 10px 30px rgba(0, 123, 255, 0.3);
-        }
+    .project-list li {
+      padding: 15px 20px;
+      margin-bottom: 15px;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.02) 100%);
+      border-radius: 10px;
+      border-left: 3px solid rgba(255, 255, 255, 0.3);
+      transition: all 0.3s ease;
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.05);
+    }
 
-        .stock-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 15px 40px rgba(0, 123, 255, 0.4);
-        }
+    .project-list li:hover {
+      transform: translateX(10px);
+      border-left-color: #ffffff;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+      box-shadow: 0 0 40px rgba(255, 255, 255, 0.15);
+    }
 
-        .chat-box {
-            background: rgba(10, 10, 10, 0.8);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 12px;
-            height: 200px;
-            overflow-y: auto;
-            padding: 15px;
-            margin-bottom: 20px;
-            text-align: left;
-        }
+    .project-list a {
+      color: #ffffff;
+      text-decoration: none;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+      transition: all 0.3s ease;
+    }
 
-        .chat-box::-webkit-scrollbar {
-            width: 6px;
-        }
+    .project-list a:hover {
+      border-bottom-color: #ffffff;
+      text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    }
 
-        .chat-box::-webkit-scrollbar-track {
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 3px;
-        }
+    .skill-bar {
+      margin-bottom: 25px;
+    }
 
-        .chat-box::-webkit-scrollbar-thumb {
-            background: linear-gradient(45deg, #00ff88, #007bff);
-            border-radius: 3px;
-        }
+    .skill-name {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 8px;
+      color: #ffffff;
+      font-weight: 500;
+    }
 
-        .chat-message {
-            margin-bottom: 10px;
-            padding: 8px 12px;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 8px;
-            border-left: 3px solid #00ff88;
-            animation: fadeIn 0.3s ease;
-        }
+    .skill-progress {
+      width: 100%;
+      height: 10px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.3);
+    }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+    .skill-progress-bar {
+      height: 100%;
+      background: linear-gradient(90deg, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0.4) 100%);
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+      transition: width 1.5s ease-out;
+      animation: shimmer 2s infinite;
+    }
 
-        .status {
-            color: #888;
-            font-style: italic;
-            text-align: center;
-            margin-bottom: 15px;
-        }
+    @keyframes shimmer {
+      0%, 100% {
+        box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+      }
+      50% {
+        box-shadow: 0 0 30px rgba(255, 255, 255, 0.7);
+      }
+    }
 
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            z-index: 1000;
-            backdrop-filter: blur(5px);
-        }
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
 
-        .modal-content {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: rgba(15, 15, 15, 0.95);
-            border-radius: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 30px;
-            max-width: 400px;
-            width: 90%;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
-        }
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
 
-        .modal h3 {
-            margin-bottom: 20px;
-            color: #00ff88;
-        }
+    @keyframes glow {
+      0%, 100% {
+        box-shadow: 0 0 60px rgba(255, 255, 255, 0.3),
+                    0 0 100px rgba(255, 255, 255, 0.2),
+                    inset 0 0 30px rgba(255, 255, 255, 0.1);
+      }
+      50% {
+        box-shadow: 0 0 80px rgba(255, 255, 255, 0.4),
+                    0 0 120px rgba(255, 255, 255, 0.3),
+                    inset 0 0 40px rgba(255, 255, 255, 0.15);
+      }
+    }
 
-        .account-details {
-            background: rgba(10, 10, 10, 0.8);
-            padding: 15px;
-            border-radius: 12px;
-            margin-bottom: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 2rem;
+      }
 
-        .detail-row {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 10px;
-            padding: 5px 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
+      h2 {
+        font-size: 1.5rem;
+      }
 
-        .close-btn {
-            background: linear-gradient(45deg, #ff4757, #ff3742);
-            padding: 10px 20px;
-            border-radius: 8px;
-        }
+      .section {
+        padding: 30px 20px;
+      }
 
-        .loading {
-            display: inline-block;
-            width: 20px;
-            height: 20px;
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            border-top: 2px solid #00ff88;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        .error {
-            color: #ff4757;
-            background: rgba(255, 71, 87, 0.1);
-            border-left: 3px solid #ff4757;
-        }
-
-        .success {
-            color: #00ff88;
-            background: rgba(0, 255, 136, 0.1);
-            border-left: 3px solid #00ff88;
-        }
-    </style>
+      .container {
+        padding: 40px 15px;
+      }
+    }
+  </style>
 </head>
+
 <body>
-    <div class="container">
-        <div class="logo">M</div>
-        <h1>Minecraft Generator</h1>
-        <p class="description">#1 FREE Minecraft Account Generator</p>
-        
-        <div class="button-group">
-            <button class="generate-btn" onclick="generateAccount()">Generate</button>
-            <button class="stock-btn" onclick="showStock()">Stock</button>
-        </div>
-
-        <div class="status" id="status">Ready to generate accounts...</div>
-
-        <div class="chat-box" id="chatBox">
-            <div class="chat-message">
-                <strong>System:</strong> Welcome to the Minecraft Account Generator!
-            </div>
-            <div class="chat-message">
-                <strong>Info:</strong> Click "Generate" to create a new account or "Stock" to view available accounts.
-            </div>
-        </div>
+  <div class="container">
+    <div class="profile-section">
+      <div class="profile-image"></div>
+      <h1>Angelic</h1>
+      <p class="subtitle">All-Around Developer</p>
     </div>
 
-    <!-- Modal for account details -->
-    <div class="modal" id="accountModal">
-        <div class="modal-content">
-            <h3>Generated Account Details</h3>
-            <div class="account-details" id="accountDetails">
-                <!-- Account details will be populated here -->
-            </div>
-            <button class="close-btn" onclick="closeModal()">Close</button>
+    <div class="divider"></div>
+
+    <section class="section">
+      <h2>About</h2>
+      <p>Hi! I'm a 16-year-old developer with 2+ years of coding experience. I enjoy making fun and useful projects, and I'm always ready for a challenge. I usually work on paid projects, but depending on the size, I'm open to talking about the price—and if a project really interests me, I might even do it for free.</p>
+      <p>If you need someone who's reliable, motivated, and easy to work with, reach out! I'm always happy to hear new ideas and help bring them to life.</p>
+    </section>
+
+    <div class="divider"></div>
+
+    <section class="section">
+      <h2>Coding Experience</h2>
+      <p>I have experience working with a wide variety of programming languages, including:</p>
+      
+      <div class="skill-bar">
+        <div class="skill-name">
+          <span>HTML</span>
+          <span>90%</span>
         </div>
-    </div>
+        <div class="skill-progress">
+          <div class="skill-progress-bar" style="width: 90%"></div>
+        </div>
+      </div>
 
-    <script>
-        let accountCount = 0;
-        const chatBox = document.getElementById('chatBox');
-        const status = document.getElementById('status');
-        const modal = document.getElementById('accountModal');
-        const accountDetails = document.getElementById('accountDetails');
+      <div class="skill-bar">
+        <div class="skill-name">
+          <span>Java</span>
+          <span>80%</span>
+        </div>
+        <div class="skill-progress">
+          <div class="skill-progress-bar" style="width: 80%"></div>
+        </div>
+      </div>
 
-        // Sample account data
-        const sampleEmails = [
-            'gamer2024@gmail.com', 'minecraft_pro@outlook.com', 'blockmaster@yahoo.com', 
-            'craftworld@hotmail.com', 'pixelgamer@gmail.com', 'enderdragon@outlook.com'
-        ];
-        const samplePasswords = [
-            'MineCraft123!', 'Gaming456#', 'Player789$', 'BlockWorld321@', 
-            'CraftMaster99!', 'EnderWorld88#'
-        ];
+      <div class="skill-bar">
+        <div class="skill-name">
+          <span>C++, C, C#</span>
+          <span>50%</span>
+        </div>
+        <div class="skill-progress">
+          <div class="skill-progress-bar" style="width: 50%"></div>
+        </div>
+      </div>
 
-        function addChatMessage(message, type = 'normal') {
-            const messageDiv = document.createElement('div');
-            messageDiv.className = `chat-message ${type}`;
-            messageDiv.innerHTML = message;
-            chatBox.appendChild(messageDiv);
-            chatBox.scrollTop = chatBox.scrollHeight;
-        }
+      <div class="skill-bar">
+        <div class="skill-name">
+          <span>JavaScript</span>
+          <span>85%</span>
+        </div>
+        <div class="skill-progress">
+          <div class="skill-progress-bar" style="width: 85%"></div>
+        </div>
+      </div>
 
-        function generateRandomString(length) {
-            const chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-            let result = '';
-            for (let i = 0; i < length; i++) {
-                result += chars.charAt(Math.floor(Math.random() * chars.length));
-            }
-            return result;
-        }
+      <div class="skill-bar">
+        <div class="skill-name">
+          <span>Python</span>
+          <span>100%</span>
+        </div>
+        <div class="skill-progress">
+          <div class="skill-progress-bar" style="width: 100%"></div>
+        </div>
+      </div>
 
-        function maskString(str) {
-            if (str.length <= 3) return str;
-            return str.substring(0, 3) + '*'.repeat(str.length - 3);
-        }
+      <div class="skill-bar">
+        <div class="skill-name">
+          <span>Minecraft Development</span>
+          <span>95%</span>
+        </div>
+        <div class="skill-progress">
+          <div class="skill-progress-bar" style="width: 95%"></div>
+        </div>
+      </div>
 
-        function generateAccount() {
-            status.innerHTML = '<span class="loading"></span> Generating account...';
-            
-            // Simulate some errors occasionally
-            if (Math.random() < 0.2) {
-                setTimeout(() => {
-                    addChatMessage('<strong>Error:</strong> Failed to connect to server. Retrying...', 'error');
-                    status.textContent = 'Connection error - retrying...';
-                    
-                    setTimeout(() => {
-                        proceedWithGeneration();
-                    }, 1000);
-                }, 1500);
-            } else {
-                setTimeout(() => {
-                    proceedWithGeneration();
-                }, 2000);
-            }
-        }
+      <p>Whether it's web development, desktop applications, or Discord bots, I'm always excited to take on new challenges and expand my skillset.</p>
+    </section>
 
-        function proceedWithGeneration() {
-            accountCount++;
-            const email = sampleEmails[Math.floor(Math.random() * sampleEmails.length)];
-            const password = samplePasswords[Math.floor(Math.random() * samplePasswords.length)];
-            const username = 'Player' + generateRandomString(6);
-            
-            const maskedEmail = maskString(email);
-            const maskedPassword = maskString(password);
-            
-            // Add to chat with success styling
-            addChatMessage(`<strong>Claimed:</strong> ${maskedEmail} : ${maskedPassword}`, 'success');
-            
-            // Show detailed modal
-            showAccountDetails(email, password, username);
-            
-            status.innerHTML = `<span style="color: #00ff88;">✓</span> Successfully generated ${accountCount} accounts`;
-        }
+    <div class="divider"></div>
 
-        function showAccountDetails(email, password, username) {
-            const details = `
-                <div class="detail-row">
-                    <span><strong>Email:</strong></span>
-                    <span>${email}</span>
-                </div>
-                <div class="detail-row">
-                    <span><strong>Password:</strong></span>
-                    <span>${password}</span>
-                </div>
-                <div class="detail-row">
-                    <span><strong>Username:</strong></span>
-                    <span>${username}</span>
-                </div>
-                <div class="detail-row">
-                    <span><strong>Type:</strong></span>
-                    <span>Premium Account</span>
-                </div>
-                <div class="detail-row">
-                    <span><strong>Status:</strong></span>
-                    <span style="color: #00ff88;">✓ Active</span>
-                </div>
-                <div class="detail-row">
-                    <span><strong>Security:</strong></span>
-                    <span style="color: #007bff;">2FA Enabled</span>
-                </div>
-            `;
-            
-            accountDetails.innerHTML = details;
-            modal.style.display = 'block';
-        }
+    <section class="section">
+      <h2>Projects</h2>
+      <p>Projects I've built:</p>
+      <ul class="project-list">
+        <li>Fatal Studios Website – Responsive HTML site</li>
+        <li>Boostify Bot – Custom server boosting bot</li>
+        <li>All-Purpose Bot – Moderation, utility & fun features</li>
+        <li>License System Bot – Authentication & licensing</li>
+        <li>EonAuth - License Management - <a href="https://eonauth.vercel.app/" target="_blank" rel="noopener">https://eonauth.vercel.app/</a></li>
+        <li>SIMULATED Nitro Generator - ALL FAKE - <a href="https://dcnitrogenerator.vercel.app/" target="_blank" rel="noopener">https://dcnitrogenerator.vercel.app/</a></li>
+        <li>SIMULATED Minecraft Account Generator - ALL FAKE - <a href="https://mcaccountgenerator.vercel.app/" target="_blank" rel="noopener">https://mcaccountgenerator.vercel.app/</a></li>
+      </ul>
+      <p>Each project is built clean, optimized, and scalable.</p>
+    </section>
 
-        function showStock() {
-            status.innerHTML = '<span class="loading"></span> Checking stock...';
-            
-            // Simulate occasional stock errors
-            if (Math.random() < 0.15) {
-                setTimeout(() => {
-                    addChatMessage('<strong>Warning:</strong> Stock server temporarily unavailable', 'error');
-                    status.textContent = 'Stock check failed - please try again';
-                }, 1500);
-                return;
-            }
-            
-            setTimeout(() => {
-                const stockCount = Math.floor(Math.random() * 500) + 100;
-                const premiumStock = Math.floor(Math.random() * 50) + 25;
-                
-                addChatMessage(`<strong>Stock Update:</strong> ${stockCount} total accounts available`, 'success');
-                addChatMessage(`<strong>Premium:</strong> ${premiumStock} premium accounts in stock`);
-                addChatMessage(`<strong>Info:</strong> Accounts are restocked every 24 hours`);
-                
-                status.innerHTML = `<span style="color: #00ff88;">✓</span> ${stockCount} accounts in stock`;
-            }, 1500);
-        }
+    <div class="divider"></div>
 
-        function closeModal() {
-            modal.style.display = 'none';
-        }
-
-        // Close modal when clicking outside
-        window.onclick = function(event) {
-            if (event.target == modal) {
-                modal.style.display = 'none';
-            }
-        }
-
-        // Add some initial system messages
-        setTimeout(() => {
-            addChatMessage('<strong>System:</strong> Stock updated - 347 premium accounts available', 'success');
-        }, 1000);
-
-        setTimeout(() => {
-            addChatMessage('<strong>Security:</strong> All accounts are verified and secure');
-        }, 2500);
-
-        // Simulate occasional system messages
-        setInterval(() => {
-            if (Math.random() < 0.3) {
-                const messages = [
-                    '<strong>System:</strong> New accounts added to stock',
-                    '<strong>Info:</strong> Server maintenance completed',
-                    '<strong>Update:</strong> Premium accounts restocked'
-                ];
-                const randomMessage = messages[Math.floor(Math.random() * messages.length)];
-                addChatMessage(randomMessage);
-            }
-        }, 30000);
-    </script>
+    <section class="section">
+      <h2>Timezone & Availability</h2>
+      <p><strong>Timezone:</strong> MST/MDT</p>
+      <p><strong>Weekdays:</strong> 9 AM – 8 PM</p>
+      <p><strong>Weekends:</strong> 10 AM – 10 PM</p>
+      <p>I'm usually quick to respond and flexible with scheduling for project discussions or live fixes.</p>
+    </section>
+  </div>
 </body>
 </html>
