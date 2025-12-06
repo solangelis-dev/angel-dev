@@ -1,381 +1,226 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Angelic - Developer Portfolio</title>
-  <meta name="description" content="16-year-old all-around developer with 2+ years of coding experience specializing in web development, Discord bots, and Minecraft development" />
-  <meta name="author" content="Angelic" />
-  
-  <meta property="og:title" content="Angelic - Developer Portfolio" />
-  <meta property="og:description" content="16-year-old all-around developer with 2+ years of coding experience specializing in web development, Discord bots, and Minecraft development" />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://your-domain.com" />
-  <meta property="og:image" content="https://your-domain.com/preview.png" />
-  
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Angelic - Developer Portfolio" />
-  <meta name="twitter:description" content="16-year-old all-around developer with 2+ years of coding experience" />
-  <meta name="twitter:image" content="https://your-domain.com/preview.png" />
-  
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Angel</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-      background: linear-gradient(135deg, #000000 0%, #1a1a1a 50%, #000000 100%);
-      color: #ffffff;
-      min-height: 100vh;
-      overflow-x: hidden;
-      position: relative;
-    }
+        body {
+            font-family: 'Inter', sans-serif;
+            min-height: 100vh;
+            background: #0a0a0a;
+            background-image: 
+                radial-gradient(ellipse at top, rgba(255,255,255,0.03) 0%, transparent 50%),
+                radial-gradient(ellipse at bottom, rgba(255,255,255,0.02) 0%, transparent 50%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 40px 20px;
+            overflow-x: hidden;
+        }
 
-    body::before {
-      content: '';
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: radial-gradient(circle at 20% 50%, hsla(0, 0%, 100%, 0.05) 0%, transparent 50%),
-                  radial-gradient(circle at 80% 80%, hsla(0, 0%, 100%, 0.05) 0%, transparent 50%);
-      pointer-events: none;
-      z-index: 0;
-    }
+        .container {
+            max-width: 500px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
 
-    .container {
-      max-width: 800px;
-      margin: 0 auto;
-      padding: 60px 20px;
-      position: relative;
-      z-index: 1;
-    }
+        .name {
+            font-size: 3rem;
+            font-weight: 700;
+            color: #fff;
+            text-align: center;
+            text-shadow: 
+                0 0 20px rgba(255,255,255,0.5),
+                0 0 40px rgba(255,255,255,0.3),
+                0 0 60px rgba(255,255,255,0.2);
+            letter-spacing: 0.1em;
+            margin-bottom: 10px;
+            animation: glow 3s ease-in-out infinite alternate;
+        }
 
-    .profile-section {
-      text-align: center;
-      margin-bottom: 60px;
-      animation: fadeIn 1s ease-out;
-    }
+        @keyframes glow {
+            from {
+                text-shadow: 
+                    0 0 20px rgba(255,255,255,0.5),
+                    0 0 40px rgba(255,255,255,0.3),
+                    0 0 60px rgba(255,255,255,0.2);
+            }
+            to {
+                text-shadow: 
+                    0 0 30px rgba(255,255,255,0.7),
+                    0 0 50px rgba(255,255,255,0.5),
+                    0 0 80px rgba(255,255,255,0.3);
+            }
+        }
 
-    .profile-image {
-      width: 150px;
-      height: 150px;
-      border-radius: 50%;
-      margin: 0 auto 30px;
-      background: linear-gradient(135deg, #ffffff 0%, #888888 100%);
-      background-image: url('/profile.png');
-      background-size: cover;
-      background-position: center;
-      box-shadow: 0 0 60px hsla(0, 0%, 100%, 0.3),
-                  0 0 100px hsla(0, 0%, 100%, 0.2),
-                  inset 0 0 30px hsla(0, 0%, 100%, 0.1);
-      animation: glow 3s ease-in-out infinite;
-    }
+        .bubble {
+            background: linear-gradient(135deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.02) 100%);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 20px;
+            padding: 24px 28px;
+            width: 100%;
+            backdrop-filter: blur(10px);
+            box-shadow: 
+                0 0 30px rgba(255,255,255,0.05),
+                inset 0 0 30px rgba(255,255,255,0.02);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
 
-    h1 {
-      font-size: 3rem;
-      font-weight: 700;
-      margin-bottom: 10px;
-      background: linear-gradient(135deg, #ffffff 0%, #aaaaaa 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
+        .bubble::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.05), transparent);
+            transition: left 0.6s ease;
+        }
 
-    .subtitle {
-      font-size: 1.25rem;
-      color: #999999;
-      letter-spacing: 0.2em;
-    }
+        .bubble:hover::before {
+            left: 100%;
+        }
 
-    .divider {
-      height: 2px;
-      background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.5) 50%, transparent 100%);
-      margin: 50px 0;
-      box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
-    }
+        .bubble:hover {
+            border-color: rgba(255,255,255,0.2);
+            box-shadow: 
+                0 0 40px rgba(255,255,255,0.1),
+                inset 0 0 30px rgba(255,255,255,0.03);
+            transform: translateY(-2px);
+        }
 
-    .section {
-      background: linear-gradient(135deg, hsla(0, 0%, 100%, 0.03) 0%, hsla(0, 0%, 100%, 0.01) 100%);
-      border-radius: 20px;
-      padding: 40px;
-      margin-bottom: 40px;
-      backdrop-filter: blur(10px);
-      border: 1px solid hsla(0, 0%, 100%, 0.1);
-      box-shadow: 0 8px 32px hsla(0, 0%, 0%, 0.3),
-                  0 0 40px hsla(0, 0%, 100%, 0.05),
-                  inset 0 0 20px hsla(0, 0%, 100%, 0.02);
-      animation: fadeInUp 0.8s ease-out;
-      transition: all 0.3s ease;
-    }
+        .bubble-title {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: rgba(255,255,255,0.4);
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            margin-bottom: 10px;
+        }
 
-    .section:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 12px 48px hsla(0, 0%, 0%, 0.4),
-                  0 0 60px hsla(0, 0%, 100%, 0.1),
-                  inset 0 0 30px hsla(0, 0%, 100%, 0.03);
-    }
+        .bubble-content {
+            font-size: 1rem;
+            font-weight: 400;
+            color: rgba(255,255,255,0.9);
+            line-height: 1.6;
+        }
 
-    h2 {
-      font-size: 2rem;
-      margin-bottom: 20px;
-      background: linear-gradient(135deg, #ffffff 0%, #aaaaaa 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
+        .bubble-content.large {
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
 
-    p, li {
-      line-height: 1.8;
-      color: #cccccc;
-      margin-bottom: 15px;
-    }
+        .hobbies-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
 
-    strong {
-      color: #ffffff;
-    }
+        .hobby-tag {
+            background: linear-gradient(135deg, rgba(255,255,255,0.12) 0%, rgba(255,255,255,0.04) 100%);
+            border: 1px solid rgba(255,255,255,0.15);
+            padding: 8px 16px;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            color: rgba(255,255,255,0.85);
+            transition: all 0.3s ease;
+        }
 
-    .project-list {
-      list-style: none;
-      padding-left: 0;
-    }
+        .hobby-tag:hover {
+            background: linear-gradient(135deg, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0.08) 100%);
+            border-color: rgba(255,255,255,0.3);
+            box-shadow: 0 0 20px rgba(255,255,255,0.1);
+        }
 
-    .project-list li {
-      padding: 15px 20px;
-      margin-bottom: 15px;
-      background: linear-gradient(135deg, hsla(0, 0%, 100%, 0.05) 0%, hsla(0, 0%, 100%, 0.02) 100%);
-      border-radius: 10px;
-      border-left: 3px solid hsla(0, 0%, 100%, 0.3);
-      transition: all 0.3s ease;
-      box-shadow: 0 0 20px hsla(0, 0%, 100%, 0.05);
-    }
+        .about-bubble {
+            background: linear-gradient(145deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.03) 50%, rgba(255,255,255,0.06) 100%);
+        }
 
-    .project-list li:hover {
-      transform: translateX(10px);
-      border-left-color: #ffffff;
-      background: linear-gradient(135deg, hsla(0, 0%, 100%, 0.1) 0%, hsla(0, 0%, 100%, 0.05) 100%);
-      box-shadow: 0 0 40px hsla(0, 0%, 100%, 0.15);
-    }
+        .divider {
+            width: 60px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            margin: 10px 0;
+        }
 
-    .project-list a {
-      color: #ffffff;
-      text-decoration: none;
-      border-bottom: 1px solid hsla(0, 0%, 100%, 0.3);
-      transition: all 0.3s ease;
-    }
+        .footer {
+            margin-top: 20px;
+            font-size: 0.75rem;
+            color: rgba(255,255,255,0.2);
+            text-align: center;
+        }
 
-    .project-list a:hover {
-      border-bottom-color: #ffffff;
-      text-shadow: 0 0 10px hsla(0, 0%, 100%, 0.5);
-    }
+        .subtitle {
+            font-size: 1.2rem;
+            color: rgba(255,255,255,0.4);
+            margin-top: -5px;
+            margin-bottom: 5px;
+            letter-spacing: 0.3em;
+        }
 
-    .skill-bar {
-      margin-bottom: 25px;
-    }
-
-    .skill-name {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 8px;
-      color: #ffffff;
-      font-weight: 500;
-    }
-
-    .skill-progress {
-      width: 100%;
-      height: 10px;
-      background: hsla(0, 0%, 100%, 0.1);
-      border-radius: 10px;
-      overflow: hidden;
-      box-shadow: inset 0 0 10px hsla(0, 0%, 0%, 0.3);
-    }
-
-    .skill-progress-bar {
-      height: 100%;
-      background: linear-gradient(90deg, hsla(0, 0%, 100%, 0.8) 0%, hsla(0, 0%, 100%, 0.4) 100%);
-      border-radius: 10px;
-      box-shadow: 0 0 20px hsla(0, 0%, 100%, 0.5);
-      transition: width 1.5s ease-out;
-      animation: shimmer 2s infinite;
-    }
-
-    @keyframes shimmer {
-      0%, 100% {
-        box-shadow: 0 0 20px hsla(0, 0%, 100%, 0.5);
-      }
-      50% {
-        box-shadow: 0 0 30px hsla(0, 0%, 100%, 0.7);
-      }
-    }
-
-    @keyframes fadeIn {
-      from {
-        opacity: 0;
-      }
-      to {
-        opacity: 1;
-      }
-    }
-
-    @keyframes fadeInUp {
-      from {
-        opacity: 0;
-        transform: translateY(30px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    @keyframes glow {
-      0%, 100% {
-        box-shadow: 0 0 60px hsla(0, 0%, 100%, 0.3),
-                    0 0 100px hsla(0, 0%, 100%, 0.2),
-                    inset 0 0 30px hsla(0, 0%, 100%, 0.1);
-      }
-      50% {
-        box-shadow: 0 0 80px hsla(0, 0%, 100%, 0.4),
-                    0 0 120px hsla(0, 0%, 100%, 0.3),
-                    inset 0 0 40px hsla(0, 0%, 100%, 0.15);
-      }
-    }
-
-    @media (max-width: 768px) {
-      h1 {
-        font-size: 2rem;
-      }
-
-      h2 {
-        font-size: 1.5rem;
-      }
-
-      .section {
-        padding: 30px 20px;
-      }
-
-      .container {
-        padding: 40px 15px;
-      }
-    }
-  </style>
+        @media (max-width: 480px) {
+            .name {
+                font-size: 2.2rem;
+            }
+            
+            .bubble {
+                padding: 20px 22px;
+            }
+            
+            .hobby-tag {
+                padding: 6px 14px;
+                font-size: 0.85rem;
+            }
+        }
+    </style>
 </head>
-
 <body>
-  <div class="container">
-    <div class="profile-section">
-      <div class="profile-image"></div>
-      <h1>Angelic</h1>
-      <p class="subtitle">All-Around Developer</p>
+    <div class="container">
+        <h1 class="name">༺ Angel ༻</h1>
+        <div class="subtitle">Chill Angel ˚ʚ♡ɞ˚</div>
+        
+        <div class="divider"></div>
+
+        <div class="bubble">
+            <div class="bubble-title">✦ Timezone ✦</div>
+            <div class="bubble-content large">MST & MDT</div>
+        </div>
+
+        <div class="bubble">
+            <div class="bubble-title">♱ Hobbies ♱</div>
+            <div class="hobbies-list">
+                <span class="hobby-tag">☆ Coding</span>
+                <span class="hobby-tag">🎮 Playing Valorant</span>
+                <span class="hobby-tag">♪ Music</span>
+                <span class="hobby-tag">💬 Talking to Friends</span>
+            </div>
+        </div>
+
+        <div class="bubble about-bubble">
+            <div class="bubble-title">♡ About Me ♡</div>
+            <div class="bubble-content">
+                I'm calm and level-headed, rarely upset or down. I've been coding for over 2 years and have experience with a variety of languages. I love coding for friends and taking on commissions.
+                <br><br>
+                If I ever come across as toxic, rude, or aggressive, please know I don't mean it; it's just me releasing some emotions. ☁️
+            </div>
+        </div>
+
+        <div class="footer">✧ ༺ ♰ ༻ ✧</div>
     </div>
-
-    <div class="divider"></div>
-
-    <section class="section">
-      <h2>About</h2>
-      <p>Hi! I'm a 18-year-old developer with 2+ years of coding experience. I enjoy making fun and useful projects, and I'm always ready for a challenge. I usually work on paid projects, but depending on the size, I'm open to talking about the price—and if a project really interests me, I might even do it for free.</p>
-      <p>If you need someone who's reliable, motivated, and easy to work with, reach out! I'm always happy to hear new ideas and help bring them to life.</p>
-    </section>
-
-    <div class="divider"></div>
-
-    <section class="section">
-      <h2>Coding Experience</h2>
-      <p>I have experience working with a wide variety of programming languages, including:</p>
-      
-      <div class="skill-bar">
-        <div class="skill-name">
-          <span>HTML</span>
-          <span>90%</span>
-        </div>
-        <div class="skill-progress">
-          <div class="skill-progress-bar" style="width: 90%"></div>
-        </div>
-      </div>
-
-      <div class="skill-bar">
-        <div class="skill-name">
-          <span>Java</span>
-          <span>80%</span>
-        </div>
-        <div class="skill-progress">
-          <div class="skill-progress-bar" style="width: 80%"></div>
-        </div>
-      </div>
-
-      <div class="skill-bar">
-        <div class="skill-name">
-          <span>C++, C, C#</span>
-          <span>50%</span>
-        </div>
-        <div class="skill-progress">
-          <div class="skill-progress-bar" style="width: 50%"></div>
-        </div>
-      </div>
-
-      <div class="skill-bar">
-        <div class="skill-name">
-          <span>JavaScript</span>
-          <span>85%</span>
-        </div>
-        <div class="skill-progress">
-          <div class="skill-progress-bar" style="width: 85%"></div>
-        </div>
-      </div>
-
-      <div class="skill-bar">
-        <div class="skill-name">
-          <span>Python</span>
-          <span>100%</span>
-        </div>
-        <div class="skill-progress">
-          <div class="skill-progress-bar" style="width: 100%"></div>
-        </div>
-      </div>
-
-      <div class="skill-bar">
-        <div class="skill-name">
-          <span>Minecraft Development</span>
-          <span>95%</span>
-        </div>
-        <div class="skill-progress">
-          <div class="skill-progress-bar" style="width: 95%"></div>
-        </div>
-      </div>
-
-      <p>Whether it's web development, desktop applications, or Discord bots, I'm always excited to take on new challenges and expand my skillset.</p>
-    </section>
-
-    <div class="divider"></div>
-
-    <section class="section">
-      <h2>Projects</h2>
-      <p>Projects I've built:</p>
-      <ul class="project-list">
-        <li>Fatal Studios Website – Responsive HTML site</li>
-        <li>Boostify Bot – Custom server boosting bot</li>
-        <li>All-Purpose Bot – Moderation, utility & fun features</li>
-        <li>License System Bot – Authentication & licensing</li>
-        <li>EonAuth - License Management - <a href="https://eonauth.vercel.app/" target="_blank" rel="noopener">https://eonauth.vercel.app/</a></li>
-        <li>SIMULATED Nitro Generator - ALL FAKE - <a href="https://dcnitrogenerator.vercel.app/" target="_blank" rel="noopener">https://dcnitrogenerator.vercel.app/</a></li>
-      </ul>
-      <p>Each project is built clean, optimized, and scalable.</p>
-    </section>
-
-    <div class="divider"></div>
-
-    <section class="section">
-      <h2>Timezone & Availability</h2>
-      <p><strong>Timezone:</strong> MST/MDT</p>
-      <p><strong>Weekdays:</strong> 9 AM – 8 PM</p>
-      <p><strong>Weekends:</strong> 10 AM – 10 PM</p>
-      <p>I'm usually quick to respond and flexible with scheduling for project discussions or live fixes.</p>
-    </section>
-  </div>
 </body>
 </html>
-
