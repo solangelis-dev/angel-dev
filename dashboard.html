@@ -4,223 +4,203 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Angel</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
+        /* General Styles */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
         }
 
         body {
-            font-family: 'Inter', sans-serif;
-            min-height: 100vh;
-            background: #0a0a0a;
-            background-image: 
-                radial-gradient(ellipse at top, rgba(255,255,255,0.03) 0%, transparent 50%),
-                radial-gradient(ellipse at bottom, rgba(255,255,255,0.02) 0%, transparent 50%);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 40px 20px;
+            background-color: #1a1a1a; /* base black */
+            color: #e0d6f9; /* light purple text */
+            line-height: 1.6;
             overflow-x: hidden;
-        }
-
-        .container {
-            max-width: 500px;
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 20px;
-        }
-
-        .name {
-            font-size: 3rem;
-            font-weight: 700;
-            color: #fff;
-            text-align: center;
-            text-shadow: 
-                0 0 20px rgba(255,255,255,0.5),
-                0 0 40px rgba(255,255,255,0.3),
-                0 0 60px rgba(255,255,255,0.2);
-            letter-spacing: 0.1em;
-            margin-bottom: 10px;
-            animation: glow 3s ease-in-out infinite alternate;
-        }
-
-        @keyframes glow {
-            from {
-                text-shadow: 
-                    0 0 20px rgba(255,255,255,0.5),
-                    0 0 40px rgba(255,255,255,0.3),
-                    0 0 60px rgba(255,255,255,0.2);
-            }
-            to {
-                text-shadow: 
-                    0 0 30px rgba(255,255,255,0.7),
-                    0 0 50px rgba(255,255,255,0.5),
-                    0 0 80px rgba(255,255,255,0.3);
-            }
-        }
-
-        .bubble {
-            background: linear-gradient(135deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.02) 100%);
-            border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 20px;
-            padding: 24px 28px;
-            width: 100%;
-            backdrop-filter: blur(10px);
-            box-shadow: 
-                0 0 30px rgba(255,255,255,0.05),
-                inset 0 0 30px rgba(255,255,255,0.02);
-            transition: all 0.4s ease;
             position: relative;
-            overflow: hidden;
         }
 
-        .bubble::before {
-            content: '';
-            position: absolute;
+        a {
+            color: #c7b3f3;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: #f0e0ff;
+        }
+
+        /* Grid Pattern Background */
+        body::before {
+            content: "";
+            position: fixed;
             top: 0;
-            left: -100%;
+            left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.05), transparent);
-            transition: left 0.6s ease;
+            background-image: linear-gradient(45deg, rgba(199,179,243,0.15) 1px, transparent 1px),
+                              linear-gradient(-45deg, rgba(199,179,243,0.15) 1px, transparent 1px);
+            background-size: 40px 40px;
+            z-index: -1;
         }
 
-        .bubble:hover::before {
-            left: 100%;
+        /* Container */
+        .container {
+            width: 90%;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 40px 0;
         }
 
-        .bubble:hover {
-            border-color: rgba(255,255,255,0.2);
-            box-shadow: 
-                0 0 40px rgba(255,255,255,0.1),
-                inset 0 0 30px rgba(255,255,255,0.03);
-            transform: translateY(-2px);
+        /* Header / Landing */
+        header {
+            text-align: center;
+            padding: 80px 20px;
+            animation: fadeInDown 1.2s ease forwards;
         }
 
-        .bubble-title {
-            font-size: 0.75rem;
-            font-weight: 600;
-            color: rgba(255,255,255,0.4);
-            text-transform: uppercase;
-            letter-spacing: 0.15em;
+        header h1 {
+            font-size: 4rem;
+            color: #c7b3f3;
+            margin-bottom: 10px;
+            opacity: 0;
+            animation: fadeIn 1s 0.3s forwards;
+        }
+
+        header p {
+            font-size: 1.5rem;
+            color: #e0d6f9;
+            opacity: 0;
+            animation: fadeIn 1s 0.6s forwards;
+        }
+
+        /* Sections */
+        .section {
+            background-color: #2a2a2a;
+            border-left: 5px solid #c7b3f3;
+            padding: 30px 20px;
+            margin: 30px 0;
+            border-radius: 10px;
+            opacity: 0;
+            transform: translateY(50px);
+            animation: fadeInUp 1s ease forwards;
+        }
+
+        .section:nth-child(2) { animation-delay: 0.3s; }
+        .section:nth-child(3) { animation-delay: 0.5s; }
+        .section:nth-child(4) { animation-delay: 0.7s; }
+
+        .section h2 {
+            font-size: 2rem;
+            margin-bottom: 15px;
+            color: #c7b3f3;
+        }
+
+        .section p, .section ul {
+            font-size: 1rem;
             margin-bottom: 10px;
         }
 
-        .bubble-content {
-            font-size: 1rem;
-            font-weight: 400;
-            color: rgba(255,255,255,0.9);
-            line-height: 1.6;
+        .skills-list {
+            list-style: none;
+            padding-left: 0;
         }
 
-        .bubble-content.large {
-            font-size: 1.1rem;
-            font-weight: 500;
+        .skills-list li {
+            background-color: #3a3a3a;
+            margin: 5px 5px 5px 0;
+            padding: 8px 12px;
+            border-radius: 5px;
+            display: inline-block;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+            cursor: default;
         }
 
-        .hobbies-list {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
+        .skills-list li:hover {
+            transform: translateY(-5px);
+            background-color: #c7b3f3;
+            color: #1a1a1a;
         }
 
-        .hobby-tag {
-            background: linear-gradient(135deg, rgba(255,255,255,0.12) 0%, rgba(255,255,255,0.04) 100%);
-            border: 1px solid rgba(255,255,255,0.15);
-            padding: 8px 16px;
-            border-radius: 50px;
-            font-size: 0.9rem;
-            color: rgba(255,255,255,0.85);
-            transition: all 0.3s ease;
-        }
-
-        .hobby-tag:hover {
-            background: linear-gradient(135deg, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0.08) 100%);
-            border-color: rgba(255,255,255,0.3);
-            box-shadow: 0 0 20px rgba(255,255,255,0.1);
-        }
-
-        .about-bubble {
-            background: linear-gradient(145deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.03) 50%, rgba(255,255,255,0.06) 100%);
-        }
-
-        .divider {
-            width: 60px;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-            margin: 10px 0;
-        }
-
-        .footer {
-            margin-top: 20px;
-            font-size: 0.75rem;
-            color: rgba(255,255,255,0.2);
+        footer {
             text-align: center;
+            padding: 40px 20px;
+            font-size: 0.9rem;
+            color: #a9a9a9;
         }
 
-        .subtitle {
-            font-size: 1.2rem;
-            color: rgba(255,255,255,0.4);
-            margin-top: -5px;
-            margin-bottom: 5px;
-            letter-spacing: 0.3em;
+        @media (max-width: 600px) {
+            header h1 {
+                font-size: 3rem;
+            }
+
+            .skills-list li {
+                display: block;
+                margin-right: 0;
+            }
         }
 
-        @media (max-width: 480px) {
-            .name {
-                font-size: 2.2rem;
-            }
-            
-            .bubble {
-                padding: 20px 22px;
-            }
-            
-            .hobby-tag {
-                padding: 6px 14px;
-                font-size: 0.85rem;
-            }
+        /* Animations */
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+
+        @keyframes fadeInDown {
+            0% { opacity: 0; transform: translateY(-50px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInUp {
+            to { opacity: 1; transform: translateY(0); }
         }
     </style>
 </head>
 <body>
+    <header>
+        <h1>Angel</h1>
+        <p>All-Around Developer</p>
+    </header>
+
     <div class="container">
-        <h1 class="name">༺ Angel ༻</h1>
-        <div class="subtitle">Chill Angel ˚ʚ♡ɞ˚</div>
-        
-        <div class="divider"></div>
+        <!-- About Me -->
+        <section class="section" id="about">
+            <h2>About Me</h2>
+            <p>Hello! I'm Angel. I've been developing websites, Discord bots, automation scripts, and more since 2018. My skills span multiple programming languages and development areas. I enjoy taking on new challenges and constantly improving my craft. Excited to create amazing projects!</p>
+        </section>
 
-        <div class="bubble">
-            <div class="bubble-title">✦ Timezone ✦</div>
-            <div class="bubble-content large">MST & MDT</div>
-        </div>
+        <!-- My Skills -->
+        <section class="section" id="skills">
+            <h2>My Skills</h2>
+            <p>Here's a list of my main skills:</p>
+            <ul class="skills-list">
+                <li>HTML</li>
+                <li>CSS</li>
+                <li>C++</li>
+                <li>C</li>
+                <li>JavaScript</li>
+                <li>Python</li>
+                <li>and much more...</li>
+            </ul>
+        </section>
 
-        <div class="bubble">
-            <div class="bubble-title">♱ Hobbies ♱</div>
-            <div class="hobbies-list">
-                <span class="hobby-tag">☆ Coding</span>
-                <span class="hobby-tag">🎮 Playing Valorant</span>
-                <span class="hobby-tag">♪ Music</span>
-                <span class="hobby-tag">💬 Talking to Friends</span>
-            </div>
-        </div>
+        <!-- Information -->
+        <section class="section" id="info">
+            <h2>Information</h2>
+            <p>I've created over 100 Discord bots, websites, and projects over the years. I love solving challenges, meeting new people, and making life easier through code. If you need a project done, you'll find my contact info below!</p>
+        </section>
 
-        <div class="bubble about-bubble">
-            <div class="bubble-title">♡ About Me ♡</div>
-            <div class="bubble-content">
-                I'm calm and level-headed, rarely upset or down. I've been coding for over 2 years and have experience with a variety of languages. I love coding for friends and taking on commissions.
-                <br><br>
-                If I ever come across as toxic, rude, or aggressive, please know I don't mean it; it's just me releasing some emotions. ☁️
-            </div>
-        </div>
-
-        <div class="footer">✧ ༺ ♰ ༻ ✧</div>
+        <!-- Contact Me -->
+        <section class="section" id="contact">
+            <h2>Contact Me</h2>
+            <p>Discord: <a href="https://discord.com/users/.angel3s.">.angel3s.</a></p>
+            <p>Timezone: MST / MDT</p>
+            <p>Hit me up if you need anything done! 💜</p>
+        </section>
     </div>
+
+    <footer>
+        &copy; 2025 Angel. All rights reserved.
+    </footer>
 </body>
 </html>
